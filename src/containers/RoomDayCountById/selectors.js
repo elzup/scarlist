@@ -1,0 +1,8 @@
+// @flow
+import moment from 'moment'
+import type { State, RoomDayCounts } from '../../types'
+
+export function getRoomCountToday(state: State, roomId: string): RoomDayCounts {
+  const today = moment().format(`YYYY-MM-DD`)
+  return state.RoomDayCountById[`${roomId}-${today}`]
+}

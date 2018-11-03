@@ -1,0 +1,69 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": false,
+    "rooms": {
+      "$roomId": {
+        ".validate": "(newData.isBoolean())"
+      }
+    },
+    "room": {
+      "$roomId": {
+        ".validate": "newData.hasChildren(['label'])",
+        "label": { ".validate": "(newData.isString())" }
+      }
+    },
+    "users": {
+      "$userId": {
+        ".validate": "(newData.isBoolean())"
+      }
+    },
+    "user": {
+      "$userId": {
+        ".validate": "newData.hasChildren(['label'])",
+        "label": { ".validate": "(newData.isString())" }
+      }
+    },
+    "macaddr-user": {
+      "$macAddr": {
+        ".validate": "(newData.isString())"
+      }
+    },
+    "room-user-log": {
+      "$roomId": {
+        "$userId": {
+          "$logId": {
+            ".validate": "(newData.hasChildren([]))"
+          }
+        }
+      }
+    },
+    "room-user-count": {
+      "$roomId": {
+        "$userId": {
+          "month": {
+            "$ym": {
+              ".validate": "newData.isNumber()"
+            }
+          },
+          "day": {
+            "$ym": {
+              "$d": {
+                ".validate": "newData.isNumber()"
+              }
+            }
+          },
+          "hour": {
+            "$ym": {
+              "$d": {
+                "$h": {
+                  ".validate": "newData.isNumber()"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

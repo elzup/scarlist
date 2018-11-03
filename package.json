@@ -1,0 +1,117 @@
+{
+  "name": "scarlist",
+  "version": "0.1.1",
+  "private": true,
+  "homepage": "https://scarlist.anozon.me",
+  "dependencies": {
+    "@material-ui/core": "^3.2.0",
+    "@material-ui/icons": "^3.0.1",
+    "@nivo/heatmap": "^0.49.0",
+    "babel-plugin-import": "^1.9.1",
+    "dotenv": "6.0.0",
+    "firebase": "^5.3.1",
+    "google-map-react": "^1.0.8",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "promise": "8.0.2",
+    "react": "^16.4.2",
+    "react-dev-utils": "^5.0.2",
+    "react-dom": "^16.2.0",
+    "react-fontawesome": "^1.6.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.5",
+    "react-scroll-to-component": "^1.0.2",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^3.4.9",
+    "three": "^0.97.0",
+    "three-orbit-controls": "^82.1.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.4.11",
+    "@storybook/addon-links": "^3.4.11",
+    "@storybook/addons": "^3.4.11",
+    "@storybook/react": "^3.4.11",
+    "babel-core": "^6.26.3",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-s2s-action-creater": "^0.3.1",
+    "babel-plugin-s2s-action-root": "^0.4.2",
+    "babel-plugin-s2s-action-types": "^0.4.11",
+    "babel-plugin-s2s-reducer-root": "^0.3.4",
+    "babel-plugin-s2s-state-root": "^0.2.10",
+    "babel-runtime": "^6.26.0",
+    "binary": "^0.3.0",
+    "flow-bin": "^0.81.0",
+    "prettier": "^1.14.3",
+    "s2s": "^0.18.3",
+    "serve": "^6.4.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "now-start": "serve build/",
+    "s2s": "s2s",
+    "deploy:front": "up production",
+    "deploy:firebase": "firebase deploy",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "lodash"
+      ],
+      [
+        "import",
+        [
+          {
+            "libraryName": "@material-ui/core",
+            "libraryDirectory": "",
+            "camel2DashComponentName": false
+          }
+        ]
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}
