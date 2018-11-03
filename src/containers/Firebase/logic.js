@@ -4,7 +4,7 @@ import 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
-import type { ThunkAction } from '../../types'
+import type { ThunkAction, User } from '../../types'
 import { firebaseDb as fdb } from '../../services/firebase'
 // import * as actions from './actions'
 import * as authActions from '../Auth/actions'
@@ -13,14 +13,14 @@ import { saveCounts } from '../RoomDayCountById/logic'
 
 export function login(): ThunkAction {
   return dispatch => {
-    const provider = new firebase.auth.TwitterAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider()
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(res => {
-        const ouser = omitUser(res.user)
-        const userRef = fdb.ref(`user/${ouser.uid}`)
-        userRef.set(ouser)
+        const user = omitUser(res.user)
+        const userRef = fdb.ref(`user/${user.id}`)
+        userRef.set(user)
       })
   }
 }
@@ -31,13 +31,13 @@ export function logout(): ThunkAction {
       .auth()
       .signOut()
       .catch(console.error)
-    dispatch(authActions.twitterLogout())
+    dispatch(authActions.logout())
   }
 }
 
-function omitUser(user: $npm$firebase$auth$User): $Shape<any> {
+function omitUser(user: $npm$firebase$auth$User): User {
   return {
-    uid: user.uid,
+    id: user.uid,
     displayName: user.displayName || 'no name',
     photoURL: user.photoURL || '',
   }
@@ -47,9 +47,9 @@ export function refInit(): ThunkAction {
   return dispatch => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        dispatch(authActions.twitterLogin(omitUser(user)))
+        dispatch(authActions.login(omitUser(user)))
       } else {
-        dispatch(authActions.twitterLogout())
+        dispatch(authActions.logout())
       }
     })
   }

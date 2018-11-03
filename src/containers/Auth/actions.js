@@ -1,17 +1,17 @@
 // @flow
-import type { FirebaseUser } from '../../types/'
+import type { User } from '../../types/'
 
-import { TWITTER_LOGIN, TWITTER_LOGOUT } from './actionTypes'
-import type { TwitterLogin, TwitterLogout } from './actionTypes'
+import { LOGIN, LOGOUT } from './actionTypes'
+import type { Login, Logout } from './actionTypes'
 
-export function twitterLogin(firebaseUser: $Shape<FirebaseUser>): TwitterLogin {
-	return {
-		type: TWITTER_LOGIN,
-		firebaseUser,
-	}
+export function login(user: User): Login {
+  return {
+    type: LOGIN,
+    user,
+  }
 }
-export function twitterLogout(): TwitterLogout {
-	return {
-		type: TWITTER_LOGOUT,
-	}
+export function logout(): Logout {
+  return {
+    type: LOGOUT,
+  }
 }

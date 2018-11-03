@@ -1,20 +1,20 @@
 // @flow
-import type { FirebaseUser } from '../../types/'
+import type { User } from '../../types/'
 
-export const TWITTER_LOGIN: 'Auth/TWITTER_LOGIN' = 'Auth/TWITTER_LOGIN'
-export const TWITTER_LOGOUT: 'Auth/TWITTER_LOGOUT' = 'Auth/TWITTER_LOGOUT'
+export const LOGIN: 'Auth/LOGIN' = 'Auth/LOGIN'
+export const LOGOUT: 'Auth/LOGOUT' = 'Auth/LOGOUT'
 
 export const Actions = {
-	TWITTER_LOGIN,
-	TWITTER_LOGOUT,
+  LOGIN,
+  LOGOUT,
 }
 
-export type TwitterLogin = {
-	type: typeof TWITTER_LOGIN,
-	firebaseUser: $Shape<FirebaseUser>,
+export type Login = {
+  type: typeof LOGIN,
+  user: User,
 }
-export type TwitterLogout = {
-	type: typeof TWITTER_LOGOUT,
+export type Logout = {
+  type: typeof LOGOUT,
 }
 
-export type Action = TwitterLogin | TwitterLogout
+export type Action = Login | Logout

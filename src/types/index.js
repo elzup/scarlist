@@ -18,14 +18,20 @@ export type ThunkAction = (
   getState: GetState,
 ) => void | Promise<void>
 
+export type User = {
+  id: string,
+  displayName: string,
+  photoURL: string,
+}
+
+export type Auth = {
+  user?: User,
+  authorized: boolean,
+}
+
 export type Log = {
   id: string,
   timestamp: number,
-}
-
-export type User = {
-  id: string,
-  label: string,
 }
 
 export type UserHourCounts = {

@@ -13,15 +13,12 @@
         "label": { ".validate": "(newData.isString())" }
       }
     },
-    "users": {
-      "$userId": {
-        ".validate": "(newData.isBoolean())"
-      }
-    },
     "user": {
       "$userId": {
-        ".validate": "newData.hasChildren(['label'])",
-        "label": { ".validate": "(newData.isString())" }
+        ".write": "$userId === auth.uid",
+        "id": { ".validate": "(newData.isString())" },
+        "displayName": { ".validate": "(newData.isString())" },
+        "photoURL": { ".validate": "(newData.isString())" }
       }
     },
     "macaddr-user": {
