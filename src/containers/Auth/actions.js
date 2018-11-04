@@ -1,8 +1,8 @@
 // @flow
 import type { User } from '../../types/'
 
-import { LOGIN, LOGOUT } from './actionTypes'
-import type { Login, Logout } from './actionTypes'
+import { LOGIN, LOGOUT, LOGIN_FAILED } from './actionTypes'
+import type { Login, Logout, LoginFailed } from './actionTypes'
 
 export function login(user: User): Login {
   return {
@@ -13,5 +13,10 @@ export function login(user: User): Login {
 export function logout(): Logout {
   return {
     type: LOGOUT,
+  }
+}
+export function loginFailed(): LoginFailed {
+  return {
+    type: LOGIN_FAILED,
   }
 }

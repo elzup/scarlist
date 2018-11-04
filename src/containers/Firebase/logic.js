@@ -63,9 +63,12 @@ type RoomUserLogs = {
 
 export function requestData(): ThunkAction {
   return async dispatch => {
-    const roomsRaw = (await fdb.ref(`rooms`).once('value')).val()
+    const roomsRaw = (await fdb.ref(`room`).once('value')).val()
+    const usersRaw = (await fdb.ref(`user`).once('value')).val()
+    if (!roomsRaw || !usersRaw) {
+      return
+    }
     const roomIds = Object.keys(roomsRaw)
-    const usersRaw = (await fdb.ref(`users`).once('value')).val()
     const userIds = Object.keys(usersRaw)
     const counts = (await fdb.ref(`room-user-count`).once('value')).val()
     dispatch(saveCounts(counts))

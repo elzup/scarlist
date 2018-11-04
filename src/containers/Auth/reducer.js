@@ -5,15 +5,22 @@ import { Actions } from './actionTypes'
 export type State = Auth
 
 export const initialState: State = {
-  authorized: false,
+  loading: true,
 }
 
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.LOGIN:
       return {
-        user: { ...initialState.user, ...action.user },
+        loading: false,
+        user: action.user,
         authorized: true,
+      }
+
+    case Actions.LOGIN_FAILED:
+      return {
+        loading: false,
+        authorized: false,
       }
 
     case Actions.LOGOUT:

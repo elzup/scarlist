@@ -4,7 +4,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
-import type { State } from '../../types'
+import type { State, Auth } from '../../types'
 import { getIsLogin } from './selectors'
 
 type OProps = {
@@ -13,11 +13,11 @@ type OProps = {
 
 type Props = {
   children: any,
-  isLogin: boolean,
+  isLogin: Auth,
   redirectPath: string,
 }
 
-const Auth = (props: Props) => {
+const AuthContainer = (props: Props) => {
   if (props.isLogin) {
     return <Route children={props.children} />
   } else {
@@ -36,4 +36,4 @@ const conn = connect(
   {},
 )
 
-export default conn(Auth)
+export default conn(AuthContainer)

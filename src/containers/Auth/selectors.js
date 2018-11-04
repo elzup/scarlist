@@ -1,5 +1,6 @@
 // @flow
 import type { State } from '../../types'
 
-export const getIsLogin = (state: State) => state.Auth.authorized
-export const getUser = (state: State) => state.Auth.user
+export const getAuth = (state: State) => state.Auth
+export const getIsLogin = (state: State) =>
+  !state.Auth.loading && state.Auth.authorized

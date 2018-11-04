@@ -24,10 +24,17 @@ export type User = {
   photoURL: string,
 }
 
-export type Auth = {
-  user?: User,
-  authorized: boolean,
-}
+export type Auth =
+  | { loading: true }
+  | {
+      loading: false,
+      authorized: false,
+    }
+  | {
+      loading: false,
+      authorized: true,
+      user: User,
+    }
 
 export type Log = {
   id: string,
