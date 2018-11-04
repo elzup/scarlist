@@ -16,9 +16,6 @@ class RoomListContainer extends React.Component<Props> {
     const { props } = this
     return (
       <section>
-        <header>
-          <Typography variant="h4">部屋一覧</Typography>
-        </header>
         <div>
           {props.roomIds.map(roomId => (
             <RoomInfo key={roomId} roomId={roomId} />

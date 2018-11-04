@@ -29,7 +29,14 @@ export const Background = styled.div`
 export const Page = (props: Object) => (
   <Background>
     <Grid container justify={'center'}>
-      <Grid item xs={12} sm={12} md={10} {...props} />
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={10}
+        style={{ padding: '10px' }}
+        {...props}
+      />
     </Grid>
   </Background>
 )

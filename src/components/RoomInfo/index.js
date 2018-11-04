@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react'
+import _ from 'lodash'
 import type { Room, RoomDayCounts } from '../../types'
 import UserTile from '../UserTile'
-import DayHeatMap from '../DayHeatMap'
 
-import { List, ListItem, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+import './style.css'
 
 type Props = {
   room: Room,
@@ -12,36 +13,37 @@ type Props = {
 }
 
 const RoomInfo = ({ room, roomCount }: Props) => {
+  const total = room.currentUsers.length + room.todayUsers.length
   return (
     <section>
       <header>
         <Typography variant="h4">{room.id}</Typography>
       </header>
       <section>
-        <header>
-          <Typography variant="h5">今いる人</Typography>
-        </header>
-        <List>
-          {room.currentUsers.length === 0 && <span>none</span>}
+        <div className="member-list">
+          {total === 0 && <Typography>none</Typography>}
           {room.currentUsers.map(user => (
-            <ListItem key={user.user.id}>
+            <div key={user.user.id}>
               <UserTile roomUser={user} />
-            </ListItem>
+            </div>
           ))}
-        </List>
+          {room.todayUsers.map(user => (
+            <div key={user.user.id}>
+              <UserTile roomUser={user} />
+            </div>
+          ))}
+          {_.range(4 - (total % 4)).map(i => (
+            <div key={i} />
+          ))}
+        </div>
       </section>
       <section>
-        <header>
-          <Typography variant="h5">今日いた人</Typography>
-        </header>
-        <List style={{ opacity: '0.5' }}>
-          {room.todayUsers.length === 0 && <span>none</span>}
-          {room.todayUsers.map(user => (
-            <ListItem key={user.user.id}>
-              <UserTile roomUser={user} />
-            </ListItem>
+        <div className="member-list">
+          {room.todayUsers.length === 0 && <span>誰もいません</span>}
+          {_.range(4 - (room.todayUsers.length % 4)).map(i => (
+            <div key={i} />
           ))}
-        </List>
+        </div>
       </section>
     </section>
   )

@@ -1,0 +1,9 @@
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.member-list > div {
+  width: 23%;
+}

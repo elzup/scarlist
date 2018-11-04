@@ -17,9 +17,7 @@ const theme = createMuiTheme({
   palette,
   typography: {
     useNextVariants: true,
-    h4: {
-      padding: '20px',
-    },
+    h4: {},
     h6: {
       padding: '10px',
     },
