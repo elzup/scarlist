@@ -7,7 +7,7 @@ export const palette = {
   type: 'dark',
   primary: {
     main: '#191c1f',
-    light: '#484848',
+    light: '#909090',
     dark: '#212121',
   },
   secondary: orange,
@@ -17,7 +17,9 @@ const theme = createMuiTheme({
   palette,
   typography: {
     useNextVariants: true,
-    h4: {},
+    h4: {
+      marginTop: '10px',
+    },
     h6: {
       padding: '10px',
     },

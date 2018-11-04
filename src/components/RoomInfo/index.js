@@ -29,7 +29,7 @@ const RoomInfo = ({ room, roomCount }: Props) => {
           ))}
           {room.todayUsers.map(user => (
             <div key={user.user.id}>
-              <UserTile roomUser={user} />
+              <UserTile roomUser={user} timeout />
             </div>
           ))}
           {_.range(4 - (total % 4)).map(i => (

@@ -2,13 +2,15 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { storiesOf } from '@storybook/react'
+import { storiesOf, addDecorator } from '@storybook/react'
 // import { action } from '@storybook/addon-actions'
 // import { linkTo } from '@storybook/addon-links'
 import UserTile from '../components/UserTile'
 import RoomInfo from '../components/RoomInfo'
 import DayHeatMap from '../components/DayHeatMap'
 import type { RoomUser, Room } from '../types'
+import { GlobalStyle } from '../components'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const roomUser: RoomUser = {
   lastLogLabel: '2018-10-05T18:50:10+09:00',
@@ -78,13 +80,21 @@ const countData = [
   },
 ]
 
+addDecorator(storyFn => (
+  <div>
+    <GlobalStyle />
+    <CssBaseline />
+    {storyFn()}
+  </div>
+))
+
 storiesOf('RoomInfo', module).add('room1', () => (
   <RoomInfo room={room} roomCount={{ id: 'a', users: countData }} />
 ))
 
 storiesOf('UserTile', module)
   .add('user', () => <UserTile roomUser={roomUser} />)
-  .add('user negative', () => <UserTile roomUser={roomUser2} />)
+  .add('user negative', () => <UserTile roomUser={roomUser2} outdated />)
 
 storiesOf('DayHeatMap', module).add('day1', () => (
   <DayHeatMap data={countData} />

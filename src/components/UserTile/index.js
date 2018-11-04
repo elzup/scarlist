@@ -2,23 +2,28 @@
 import * as React from 'react'
 import type { RoomUser } from '../../types'
 import styled from 'styled-components'
-
-import { Typography } from '@material-ui/core'
+import { Typography, Paper } from '@material-ui/core'
 
 type Props = {
   roomUser: RoomUser,
+  timeout?: boolean,
 }
 
 const UserTile = (props: Props) => {
-  const { roomUser } = props
+  const { roomUser, timeout } = props
   const { user } = roomUser
   return (
-    <Wrapper>
+    <Wrapper data-timeout={timeout}>
       <ImgWrapper>
-        <Photo src={user.photoURL} alt={user.displayName} />
+        <Photo
+          data-timeout={timeout}
+          src={user.photoURL}
+          alt={user.displayName}
+        />
       </ImgWrapper>
       <div>
         <Name>{user.displayName}</Name>
+        <Timeout data-timeout={timeout}>{roomUser.lastLogFromNowLabel}</Timeout>
       </div>
     </Wrapper>
   )
@@ -26,14 +31,27 @@ const UserTile = (props: Props) => {
 
 const Name = styled(Typography)`
   text-align: center;
+  margin: 5px;
 `
 
-const Wrapper = styled.section`
+const Timeout = styled(Typography)`
+  text-align: center;
+  opacity: 0.3;
+  margin: 5px;
+  &[data-timeout='true'] {
+    opacity: 1;
+  }
+`
+
+const Wrapper = styled(Paper)`
   margin-top: 5px;
   width: 100%;
-  padding-top: 10px;
-  background: #484848;
-  border-radius: 10px;
+  padding: 10px 0;
+  background: #424242;
+
+  &[data-timeout='true'] {
+    opacity: 0.8;
+  }
 `
 
 const ImgWrapper = styled.div`
@@ -49,6 +67,10 @@ const Photo = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
+  border: solid 4px red;
+  &[data-timeout='true'] {
+    border: solid 4px gray;
+  }
 `
 
 export default UserTile
