@@ -18,11 +18,11 @@ const UserTile = (props: Props) => {
         <Photo
           data-timeout={timeout}
           src={user.photoURL}
-          alt={user.displayName}
+          alt={user.name || user.displayName}
         />
       </ImgWrapper>
       <div>
-        <Name>{user.displayName}</Name>
+        <Name>{user.name || user.displayName}</Name>
         <Timeout data-timeout={timeout}>{roomUser.lastLogFromNowLabel}</Timeout>
       </div>
     </Wrapper>

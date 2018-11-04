@@ -16,9 +16,9 @@ class UserForm extends React.Component<Props> {
     if (!this.nameRef || !this.macRef) {
       return
     }
-    const displayName = this.nameRef.value
+    const name = this.nameRef.value
     const macAddrs = this.macRef.value.split(',').filter(v => !!v)
-    this.props.updateUser({ ...this.props.user, displayName, macAddrs })
+    this.props.updateUser({ ...this.props.user, name, macAddrs })
   }
 
   render() {
@@ -28,7 +28,7 @@ class UserForm extends React.Component<Props> {
         <TextField
           label="名前"
           inputRef={ref => (this.nameRef = ref)}
-          defaultValue={props.user.displayName}
+          defaultValue={props.user.name || props.user.displayName}
         />
         <TextField
           label="Macアドレス"

@@ -48,22 +48,18 @@ class TopContainer extends React.Component<Props> {
               <Typography variant="h6">Mac</Typography>
               <Typography>
                 <code>
-                  <pre style={{ overflow: 'scroll', color: 'whtie' }}>
-                    {
-                      "ifconfig <Interface ex:eth0,eth1> | awk '/ether/{print $2}'"
-                    }
-                  </pre>
+                  {
+                    "ifconfig <Interface ex:eth0,eth1> | awk '/ether/{print $2}'"
+                  }
                 </code>
               </Typography>
 
               <Typography variant="h6">Linux</Typography>
               <Typography>
                 <code>
-                  <pre style={{ overflow: 'scroll', color: 'whtie' }}>
-                    {
-                      "ifconfig <Interface ex:eth0,eth1> | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
-                    }
-                  </pre>
+                  {
+                    "ifconfig <Interface ex:eth0,eth1> | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
+                  }
                 </code>
               </Typography>
 

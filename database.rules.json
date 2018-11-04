@@ -18,6 +18,7 @@
         ".write": "$userId === auth.uid",
         "id": { ".validate": "(newData.isString())" },
         "displayName": { ".validate": "(newData.isString())" },
+        "name": { ".validate": "(newData.isString())" },
         "photoURL": { ".validate": "(newData.isString())" }
       }
     },

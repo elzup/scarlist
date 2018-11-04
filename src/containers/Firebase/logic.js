@@ -50,6 +50,7 @@ async function omitUser(user: any): Promise<User> {
   const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
   return {
     id: user.uid,
+    name: user.name,
     displayName: user.displayName || 'no name',
     photoURL: user.photoURL || '',
     macAddrs,
@@ -57,10 +58,11 @@ async function omitUser(user: any): Promise<User> {
 }
 
 export function refInit(): ThunkAction {
-  return dispatch => {
+  return async dispatch => {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        dispatch(authActions.login(await omitUser(user)))
+        const userFull = (await fdb.ref(`user/${user.uid}`).once('value')).val()
+        dispatch(authActions.login(userFull))
       } else {
         dispatch(authActions.loginFailed())
       }
