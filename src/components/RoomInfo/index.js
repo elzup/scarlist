@@ -43,12 +43,6 @@ const RoomInfo = ({ room, roomCount }: Props) => {
           ))}
         </List>
       </section>
-      <section>
-        <header>
-          <Typography variant="h5">今日のログ</Typography>
-          <DayHeatMap data={roomCount.users} />
-        </header>
-      </section>
     </section>
   )
 }

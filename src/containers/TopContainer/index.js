@@ -8,8 +8,8 @@ import RoomListContainer from '../RoomListContainer'
 import { loadData } from './logic'
 import { Page } from '../../components'
 // import * as selectors from './selectors'
-import NavBar from '../NavBarContainer'
 import UserForm from '../UserForm'
+import { Paper } from '@material-ui/core'
 
 type Props = {
   loadData: typeof loadData,
@@ -24,12 +24,11 @@ class TopContainer extends React.Component<Props> {
   render() {
     return (
       <div>
-        <NavBar />
         <Page>
           <RoomListContainer />
-        </Page>
-        <Page>
-          <UserForm />
+          <Paper>
+            <UserForm />
+          </Paper>
         </Page>
       </div>
     )

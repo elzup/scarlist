@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 import type { State, Auth } from '../../types'
-import { getIsLogin } from './selectors'
+import { getAuth } from './selectors'
 
 type OProps = {
   redirectPath: string,
@@ -13,12 +13,14 @@ type OProps = {
 
 type Props = {
   children: any,
-  isLogin: Auth,
+  auth: Auth,
   redirectPath: string,
 }
 
 const AuthContainer = (props: Props) => {
-  if (props.isLogin) {
+  if (props.auth.loading) {
+    return <span>loading</span>
+  } else if (props.auth.authorized) {
     return <Route children={props.children} />
   } else {
     return <Redirect to={props.redirectPath} />
@@ -27,7 +29,7 @@ const AuthContainer = (props: Props) => {
 
 const ms = (state: State, op: OProps) => {
   return {
-    isLogin: getIsLogin(state),
+    auth: getAuth(state),
     ...op,
   }
 }

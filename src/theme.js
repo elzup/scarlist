@@ -3,11 +3,12 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import orange from '@material-ui/core/colors/orange'
 
-const palette = {
+export const palette = {
+  type: 'dark',
   primary: {
-    main: '#212121',
+    main: '#191c1f',
     light: '#484848',
-    dark: '#000000',
+    dark: '#212121',
   },
   secondary: orange,
 }
