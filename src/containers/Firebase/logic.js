@@ -21,7 +21,7 @@ export function login(): ThunkAction {
       .then(async res => {
         const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
-        userRef.set(user)
+        userRef.update(user)
       })
   }
 }
@@ -33,6 +33,15 @@ export function logout(): ThunkAction {
       .signOut()
       .catch(console.error)
     dispatch(authActions.logout())
+  }
+}
+
+export function updateMacAddr(user: User, macAddrs: string[]): ThunkAction {
+  return (dispatch, getState) => {
+    fdb.ref(`user/${user.id}`).update({ mac_addrs: macAddrs })
+    macAddrs.forEach(ma => {
+      fdb.ref(`macaddr-user/${ma}`).set()
+    })
   }
 }
 
