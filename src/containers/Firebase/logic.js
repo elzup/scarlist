@@ -1,5 +1,5 @@
 // @flow
-import firebase, { type User as FirebaseUser } from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -45,7 +45,7 @@ export function updateUser(user: User): ThunkAction {
   }
 }
 
-async function omitUser(user: FirebaseUser): Promise<User> {
+async function omitUser(user: any): Promise<User> {
   const macs = (await fdb.ref(`macaddr-user`).once('value')).val()
   const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
   return {

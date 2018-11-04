@@ -1,15 +1,19 @@
 // @flow
 
 import { createMuiTheme } from '@material-ui/core/styles'
-import lightBlue from '@material-ui/core/colors/lightBlue'
+import orange from '@material-ui/core/colors/orange'
+
+const palette = {
+  primary: {
+    main: '#212121',
+    light: '#484848',
+    dark: '#000000',
+  },
+  secondary: orange,
+}
 
 const theme = createMuiTheme({
-  palette: {
-    primary: lightBlue,
-    secondary: {
-      main: '#c51162',
-    },
-  },
+  palette,
   typography: {
     useNextVariants: true,
     h4: {

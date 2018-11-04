@@ -1,12 +1,12 @@
 // @flow
 
-import firebase, { type App as FirebaseApp } from 'firebase/app'
+import firebase from 'firebase/app'
 import config from '../config'
 
-let instance: ?{ app: FirebaseApp } = null
+let instance: ?{ app: any } = null
 
 class FirebaseService {
-  app: FirebaseApp
+  app: any
   constructor() {
     if (!instance) {
       this.app = firebase.initializeApp(config.firebase)
