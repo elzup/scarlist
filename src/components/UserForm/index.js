@@ -16,10 +16,9 @@ class UserForm extends React.Component<Props> {
     if (!this.nameRef || !this.macRef) {
       return
     }
-    const name = this.nameRef.value
+    const displayName = this.nameRef.value
     const macAddrs = this.macRef.value.split(',').filter(v => !!v)
-    console.log(macAddrs)
-    this.props.updateUser({ ...this.props.user, name, macAddrs })
+    this.props.updateUser({ ...this.props.user, displayName, macAddrs })
   }
 
   render() {
@@ -33,13 +32,13 @@ class UserForm extends React.Component<Props> {
         />
         <TextField
           label="Macアドレス"
+          helperText=",区切り"
           inputRef={ref => (this.macRef = ref)}
           defaultValue={props.user.macAddrs.join(',')}
         />
         <Button
           variant="contained"
           color="primary"
-          helperText=",区切り"
           onClick={this.onClickButton}
         >
           保存

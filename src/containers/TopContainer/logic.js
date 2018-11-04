@@ -72,8 +72,6 @@ export function receiveData({
     users.map(user => dispatch(userActions.receiveUser(user)))
     rooms.map(room => dispatch(roomActions.receiveRoom(room)))
     dispatch(roomListActions.receiveRoomList(Object.keys(roomsRaw)))
-    console.log(users)
-    console.log(rooms)
     // make user, room, roomUser
   }
 }

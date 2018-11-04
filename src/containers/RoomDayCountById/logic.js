@@ -16,6 +16,10 @@ type CountRaw = {
 }
 
 const countToColor = count => {
+  // 0 =>
+  // 1-19 =>
+  // 20-49 =>
+  // over 50 => orange
   return `hsl(240, 70%, 50%)`
 }
 
@@ -26,7 +30,6 @@ export function saveCounts(counts: CountRaw): ThunkAction {
       _.each(room, (user, userId) => {
         _.each(user.hour, (days, ym) => {
           _.each(days, (hours, d) => {
-            console.log(hours)
             const roomDayId = `${roomId}-${ym}-${d}`
             if (!roomDayCounts[roomDayId]) {
               roomDayCounts[roomDayId] = {
@@ -37,8 +40,9 @@ export function saveCounts(counts: CountRaw): ThunkAction {
             const userDay = { userId }
             _.range(0, 24).forEach(hour => {
               const count = hours[String(hour).padStart(2, '0')]
-              userDay[`${hour}`] = count || 0
-              // userDay[`${hour}Color`] = countToColor(count) // TODO: customize or remove
+              const hs = `${hour}`.padStart(2, '0')
+              userDay[hs] = count || 0
+              userDay[`${hs}Color`] = countToColor(count)
             })
             roomDayCounts[roomDayId].users.push(userDay)
           })

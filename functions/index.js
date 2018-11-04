@@ -103,9 +103,7 @@ async function getLogs(roomId) {
     .database()
     .ref(`/user`)
     .once('value')
-  console.log(usersSnap)
   const users = usersSnap.val()
-  console.log(users)
   const roomRef = admin.database().ref(`/room-user-log/${roomId}`)
   return await Promise.all(
     Object.keys(users).map(async userId => {

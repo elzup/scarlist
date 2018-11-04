@@ -11,9 +11,10 @@ type Props = {
 
 const DayHeatMap = (props: Props) => (
   <div style={{ height: '1000px', width: '1000px' }}>
+    {console.log(props)}
     <ResponsiveHeatMap
       data={props.data}
-      keys={_.range(0, 24)}
+      keys={_.range(0, 24).map(v => `${v}`.padStart(2, '0'))}
       indexBy="userId"
       margin={{
         top: 100,
@@ -36,7 +37,7 @@ const DayHeatMap = (props: Props) => (
         tickPadding: 5,
         tickRotation: 0,
         legend: 'user',
-        legendPosition: 'center',
+        legendPosition: 'middle',
         legendOffset: -40,
       }}
       cellOpacity={1}

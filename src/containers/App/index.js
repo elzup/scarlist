@@ -3,7 +3,6 @@
 import React from 'react'
 import TopContainer from '../TopContainer'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
-import NavBar from '../NavBarContainer'
 import LoginPage from '../LoginPage'
 import Auth from '../Auth'
 
