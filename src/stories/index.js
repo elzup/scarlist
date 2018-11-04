@@ -10,14 +10,15 @@ import RoomInfo from '../components/RoomInfo'
 import DayHeatMap from '../components/DayHeatMap'
 import type { RoomUser, Room } from '../types'
 
-import '../injectGlobal'
-
 const roomUser: RoomUser = {
   lastLogLabel: '2018-10-05T18:50:10+09:00',
   lastLogFromNowLabel: '2時間前',
   user: {
     id: 'elzup',
-    label: 'elzup',
+    photoURL:
+      'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
+    displayName: 'elzup',
+    macAddrs: [],
   },
   lastLog: 1538733010283,
 }
@@ -27,7 +28,10 @@ const roomUser2: RoomUser = {
   lastLogFromNowLabel: '5分前',
   user: {
     id: 'anozon',
-    label: 'anozon',
+    photoURL:
+      'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
+    displayName: 'elzup',
+    macAddrs: [],
   },
   lastLog: 1538733010283,
 }
@@ -37,7 +41,10 @@ const roomUser3: RoomUser = {
   lastLogFromNowLabel: '1分前',
   user: {
     id: 'anozon',
-    label: 'anozon',
+    photoURL:
+      'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
+    displayName: 'elzup',
+    macAddrs: [],
   },
   lastLog: 1538733010283,
 }
@@ -49,10 +56,12 @@ const room: Room = {
   todayUsers: [roomUser, roomUser2, roomUser3],
 }
 
+const keys24 = _.range(24).map(v => _.padStart(`${v}`, 2, '0'))
+
 const rollDice = () =>
-  _.zipObject(_.range(24), _.range(24).map(v => _.random(0, 60, false)))
+  _.zipObject(keys24, _.range(24).map(v => _.random(0, 60, false)))
 const rollDiceSmall = () =>
-  _.zipObject(_.range(24), _.range(24).map(v => _.random(0, 1, false)))
+  _.zipObject(keys24, _.range(24).map(v => _.random(0, 1, false)))
 
 const countData = [
   {
