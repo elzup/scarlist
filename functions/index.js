@@ -30,11 +30,8 @@ exports.log = functions.https.onRequest(async (req, res) => {
     return res.status(401).end()
   }
   if (req.method === 'POST') {
-    const { room_id, user_id, mac_addrs } = req.body
-    if (room_id && user_id) {
-      insertLogs(room_id, user_id)
-      res.status(200).end()
-    } else if (room_id && mac_addrs) {
+    const { room_id, mac_addrs } = req.body
+    if (room_id && mac_addrs) {
       insertLogsByMac(room_id, mac_addrs)
       res.status(200).end()
     } else {
@@ -77,15 +74,6 @@ exports.count = functions.https.onRequest(async (req, res) => {
 })
 
 async function insertLogsByMac(roomId, macAddrs) {
-  admin
-    .database()
-    .ref(`/rooms/${roomId}`)
-    .set(true) // TODO: remove
-  admin
-    .database()
-    .ref(`/room/${roomId}`)
-    .set({ label: roomId })
-
   const { ym, d, h, timestamp } = getTimes()
 
   const macaUserSnap = await admin
@@ -110,25 +98,10 @@ function registerLog(roomId, userId, ym, d, h, timestamp) {
   roomUserRef.push().set({ timestamp })
 }
 
-function insertLogs(roomId, userId) {
-  admin
-    .database()
-    .ref(`/rooms/${roomId}`)
-    .set(true)
-  admin
-    .database()
-    .ref(`/users/${userId}`)
-    .set(true)
-  // TODO: register api に分離, 認証に置き換え
-  const { ym, d, h, timestamp } = getTimes()
-
-  registerLog(roomId, userId, ym, d, h, timestamp)
-}
-
 async function getLogs(roomId) {
   const usersSnap = await admin
     .database()
-    .ref(`/users`)
+    .ref(`/user`)
     .once('value')
   console.log(usersSnap)
   const users = usersSnap.val()

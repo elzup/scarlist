@@ -62,7 +62,7 @@ export function refInit(): ThunkAction {
       if (user) {
         dispatch(authActions.login(await omitUser(user)))
       } else {
-        dispatch(authActions.logout())
+        dispatch(authActions.loginFailed())
       }
     })
   }
