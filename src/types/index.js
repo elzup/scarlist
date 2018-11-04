@@ -22,6 +22,7 @@ export type User = {
   id: string,
   displayName: string,
   photoURL: string,
+  macAddrs: string[],
 }
 
 export type Auth =
@@ -72,7 +73,9 @@ export type Room = {
   todayUsers: RoomUser[],
 }
 
-export type RoomRaw = boolean
+export type RoomRaw = {
+  label: string,
+}
 
 export type System = {
   timestamp: number,

@@ -30,6 +30,9 @@ function toRoom(
   users: User[],
   roomUserLogs: RoomUserLogs,
 ): Room {
+  if (!roomUserLogs) {
+    return { ...room, id: roomId, currentUsers: [], todayUsers: [] }
+  }
   const roomLogs = roomUserLogs[roomId]
   const roomUsers: RoomUser[] = users
     .filter((user: User) => !!roomLogs[user.id])
@@ -48,7 +51,7 @@ function toRoom(
   )
   const todayUsers = roomUsers.filter(user => todayStart.isBefore(user.lastLog))
 
-  return { id: roomId, label: roomId, currentUsers, todayUsers }
+  return { ...room, id: roomId, currentUsers, todayUsers }
 }
 
 export function receiveData({
@@ -62,8 +65,6 @@ export function receiveData({
 }): ThunkAction {
   return async (dispatch, getState) => {
     const users = _.values(usersRaw)
-    console.log(roomUserLogs)
-
     const rooms = _.map(roomsRaw, (roomRaw, roomId) =>
       toRoom(roomRaw, roomId, users, roomUserLogs),
     )

@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import _ from 'lodash'
 
 import type { ThunkAction, User } from '../../types'
 import { firebaseDb as fdb } from '../../services/firebase'
@@ -17,8 +18,8 @@ export function login(): ThunkAction {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(res => {
-        const user = omitUser(res.user)
+      .then(async res => {
+        const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
         userRef.set(user)
       })
@@ -35,19 +36,22 @@ export function logout(): ThunkAction {
   }
 }
 
-function omitUser(user: $npm$firebase$auth$User): User {
+async function omitUser(user: $npm$firebase$auth$User): Promise<User> {
+  const macs = (await fdb.ref(`macaddr-user`).once('value')).val()
+  const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
   return {
     id: user.uid,
     displayName: user.displayName || 'no name',
     photoURL: user.photoURL || '',
+    macAddrs,
   }
 }
 
 export function refInit(): ThunkAction {
   return dispatch => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        dispatch(authActions.login(omitUser(user)))
+        dispatch(authActions.login(await omitUser(user)))
       } else {
         dispatch(authActions.logout())
       }
