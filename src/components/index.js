@@ -3,7 +3,6 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { Paper } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
 
 export const Button = styled.button`
@@ -23,8 +22,6 @@ export const CardContainer = styled.div`
 
 export const Page = (props: Object) => (
   <Grid container justify={'center'}>
-    <Grid item xs={12} sm={12} md={10}>
-      <Paper {...props} />
-    </Grid>
+    <Grid item xs={12} sm={12} md={10} {...props} />
   </Grid>
 )

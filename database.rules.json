@@ -1,7 +1,7 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false,
+    ".read": "auth != null",
+    ".write": "false",
     "rooms": {
       "$roomId": {
         ".validate": "(newData.isBoolean())"
@@ -23,6 +23,7 @@
     },
     "macaddr-user": {
       "$macAddr": {
+        ".write": "newData.val() === auth.uid",
         ".validate": "(newData.isString())"
       }
     },

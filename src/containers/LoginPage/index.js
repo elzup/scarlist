@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { Typography } from '@material-ui/core'
+import { Typography, Paper } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 
 import type { State, Auth } from '../../types'
@@ -28,10 +28,12 @@ const LoginPage = (props: Props) => {
       {props.auth.loading && <span>loading</span>}
       {!props.auth.loading && (
         <Page>
-          <section>
-            <Typography variant="h4">ScarList へようこそ</Typography>
-            <Button onClick={props.login}>Google アカウントでログイン</Button>
-          </section>
+          <Paper>
+            <section>
+              <Typography variant="h4">ScarList へようこそ</Typography>
+              <Button onClick={props.login}>Google アカウントでログイン</Button>
+            </section>
+          </Paper>
         </Page>
       )}
     </div>

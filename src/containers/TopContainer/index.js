@@ -9,6 +9,7 @@ import { loadData } from './logic'
 import { Page } from '../../components'
 // import * as selectors from './selectors'
 import NavBar from '../NavBarContainer'
+import UserForm from '../UserForm'
 
 type Props = {
   loadData: typeof loadData,
@@ -26,6 +27,9 @@ class TopContainer extends React.Component<Props> {
         <NavBar />
         <Page>
           <RoomListContainer />
+        </Page>
+        <Page>
+          <UserForm />
         </Page>
       </div>
     )
