@@ -34,12 +34,12 @@ class UserForm extends React.Component<Props> {
         <TextField
           label="Macアドレス"
           inputRef={ref => (this.macRef = ref)}
-          helperText="カンマ区切りで複数登録"
           defaultValue={props.user.macAddrs.join(',')}
         />
         <Button
           variant="contained"
           color="primary"
+          helperText=",区切り"
           onClick={this.onClickButton}
         >
           保存

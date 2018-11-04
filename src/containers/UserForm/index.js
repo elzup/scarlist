@@ -1,5 +1,4 @@
 // @flow
-import * as React from 'react'
 import { connect } from 'react-redux'
 import UserForm from '../../components/UserForm'
 import type { State as RootState } from '../../types'

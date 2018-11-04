@@ -10,7 +10,8 @@ import configureStore from './store'
 
 import theme from './theme'
 
-import './injectGlobal'
+import './config/init'
+import { GlobalStyle } from './components'
 
 const store = configureStore()
 
@@ -19,6 +20,7 @@ if (root) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
+        <GlobalStyle />
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
           <App />
