@@ -3,14 +3,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import config from '../../config'
-import type {
-  ThunkAction,
-  User,
-  Room,
-  UserRaw,
-  RoomRaw,
-  RoomUser,
-} from '../../types'
+import type { ThunkAction, User, Room, RoomRaw, RoomUser } from '../../types'
 import * as roomActions from '../RoomById/actions'
 import * as roomListActions from '../RoomListContainer/actions'
 import * as userActions from '../UserById/actions'
@@ -20,10 +13,6 @@ export function loadData(): ThunkAction {
   return async (dispatch, getState) => {
     dispatch(requestData())
   }
-}
-
-function toUser(user: UserRaw, userId: string): User {
-  return { id: userId, label: userId }
 }
 
 type RoomUserLogs = {
@@ -68,11 +57,11 @@ export function receiveData({
   roomUserLogs,
 }: {
   roomsRaw: { [id: string]: RoomRaw },
-  usersRaw: { [id: string]: UserRaw },
+  usersRaw: { [id: string]: User },
   roomUserLogs: RoomUserLogs,
 }): ThunkAction {
   return async (dispatch, getState) => {
-    const users = _.map(usersRaw, toUser)
+    const users = _.values(usersRaw)
     console.log(roomUserLogs)
 
     const rooms = _.map(roomsRaw, (roomRaw, roomId) =>

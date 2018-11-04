@@ -18,7 +18,7 @@ const UserTile = (props: Props) => {
   const { roomUser } = props
   return (
     <Wrapper>
-      <Typography variant="body1">{roomUser.user.label}</Typography>
+      <Typography variant="body1">{roomUser.user.displayName}</Typography>
       <Typography variant="body2">{roomUser.lastLogFromNowLabel}</Typography>
     </Wrapper>
   )

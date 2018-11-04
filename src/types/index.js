@@ -65,7 +65,6 @@ export type Room = {
   todayUsers: RoomUser[],
 }
 
-export type UserRaw = boolean
 export type RoomRaw = boolean
 
 export type System = {
