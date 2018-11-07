@@ -37,14 +37,6 @@ const RoomInfo = ({ room, roomCount }: Props) => {
           ))}
         </div>
       </section>
-      <section>
-        <div className="member-list">
-          {room.todayUsers.length === 0 && <span>誰もいません</span>}
-          {_.range(4 - (room.todayUsers.length % 4)).map(i => (
-            <div key={i} />
-          ))}
-        </div>
-      </section>
     </section>
   )
 }

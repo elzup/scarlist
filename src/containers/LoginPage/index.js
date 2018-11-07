@@ -9,7 +9,6 @@ import { Button } from '@material-ui/core'
 import type { State, Auth } from '../../types'
 import { login } from '../Firebase/logic'
 import { Page } from '../../components'
-import NavBar from '../NavBarContainer'
 import { getAuth } from '../Auth/selectors'
 import { Redirect } from 'react-router-dom'
 
@@ -24,7 +23,6 @@ const LoginPage = (props: Props) => {
   }
   return (
     <div>
-      <NavBar />
       {props.auth.loading && <span>loading</span>}
       {!props.auth.loading && (
         <Page>

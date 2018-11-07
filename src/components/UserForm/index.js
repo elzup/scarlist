@@ -4,7 +4,7 @@ import type { User } from '../../types'
 import { TextField, Button } from '@material-ui/core'
 
 type Props = {
-  user: User,
+  user: ?User,
   updateUser: Function,
 }
 
@@ -23,6 +23,9 @@ class UserForm extends React.Component<Props> {
 
   render() {
     const { props } = this
+    if (!props.user) {
+      return <div>loading</div>
+    }
     return (
       <form noValidate autoComplete="off">
         <TextField
@@ -34,7 +37,7 @@ class UserForm extends React.Component<Props> {
           label="Macアドレス"
           helperText="複数登録はカンマ(,)区切り"
           inputRef={ref => (this.macRef = ref)}
-          defaultValue={props.user.macAddrs.join(',')}
+          defaultValue={(props.user.macAddrs || []).join(',')}
         />
         <Button
           variant="contained"

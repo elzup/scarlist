@@ -21,7 +21,8 @@ export function login(): ThunkAction {
       .then(async res => {
         const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
-        userRef.update(user)
+        userRef.set(user)
+        dispatch(authActions.login(user))
       })
   }
 }
@@ -46,14 +47,21 @@ export function updateUser(user: User): ThunkAction {
 }
 
 async function omitUser(user: any): Promise<User> {
+  const userOldSnap = await fdb.ref(`user/${user.uid}`).once('value')
+  const userOld = userOldSnap.exists() ? userOldSnap.val() : user
+
   const macs = (await fdb.ref(`macaddr-user`).once('value')).val()
   const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
+  // 基本DBにあるユーザ情報優先
+  const displayName = userOld.displayName || user.displayName || 'no name'
+  const name = userOld.name || user.name || displayName
+  const photoURL = userOld.photoURL || user.photoURL || ''
   return {
     id: user.uid,
-    name: user.name,
-    displayName: user.displayName || 'no name',
-    photoURL: user.photoURL || '',
+    displayName,
+    photoURL,
     macAddrs,
+    name,
   }
 }
 
@@ -62,7 +70,11 @@ export function refInit(): ThunkAction {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         const userFull = (await fdb.ref(`user/${user.uid}`).once('value')).val()
-        dispatch(authActions.login(userFull))
+        if (userFull) {
+          dispatch(authActions.login(userFull))
+        } else {
+          dispatch(authActions.loginFailed())
+        }
       } else {
         dispatch(authActions.loginFailed())
       }
