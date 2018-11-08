@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react'
 import type { User } from '../../types'
-import { Grid } from '@material-ui/core'
 import { TextField, Button } from '@material-ui/core'
 
 type Props = {
   user: ?User,
   updateUser: Function,
+  loading: boolean,
 }
 
 class UserForm extends React.Component<Props> {
@@ -33,12 +33,14 @@ class UserForm extends React.Component<Props> {
           <TextField
             style={{ minWidth: '300px', paddingLeft: '8px' }}
             label="名前"
+            disabled={props.loading}
             inputRef={ref => (this.nameRef = ref)}
             defaultValue={props.user.name || props.user.displayName}
           />
           <TextField
-            label="Macアドレス"
             style={{ minWidth: '300px', paddingLeft: '8px' }}
+            label="Macアドレス"
+            disabled={props.loading}
             helperText="複数登録はカンマ(,)区切り"
             inputRef={ref => (this.macRef = ref)}
             defaultValue={(props.user.macAddrs || []).join(',')}
@@ -46,6 +48,7 @@ class UserForm extends React.Component<Props> {
         </div>
         <Button
           variant="contained"
+          disabled={props.loading}
           color="primary"
           onClick={this.onClickButton}
         >

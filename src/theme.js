@@ -9,7 +9,11 @@ export const palette = {
   secondary: red,
 }
 
-const baseTheme = createMuiTheme({})
+const baseTheme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+})
 const theme = createMuiTheme({
   palette,
   typography: {

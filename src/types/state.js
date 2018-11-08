@@ -5,6 +5,7 @@ import type { State as RoomDayCountById } from '../containers/RoomDayCountById/r
 import type { State as RoomListContainer } from '../containers/RoomListContainer/reducer'
 import type { State as System } from '../containers/System/reducer'
 import type { State as UserById } from '../containers/UserById/reducer'
+import type { State as UserForm } from '../containers/UserForm/reducer'
 
 export type State = {
   Auth: Auth,
@@ -13,4 +14,5 @@ export type State = {
   RoomListContainer: RoomListContainer,
   System: System,
   UserById: UserById,
+  UserForm: UserForm,
 }

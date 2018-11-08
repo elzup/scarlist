@@ -9,6 +9,7 @@ import { getUser } from '../Auth/selectors'
 
 const ms = (state: RootState) => ({
   user: getUser(state),
+  loading: state.UserForm.loading,
 })
 
 const conn = connect(

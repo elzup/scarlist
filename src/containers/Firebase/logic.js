@@ -11,6 +11,7 @@ import { firebaseDb as fdb } from '../../services/firebase'
 import * as authActions from '../Auth/actions'
 import { receiveData } from '../TopContainer/logic'
 import { saveCounts } from '../RoomDayCountById/logic'
+import * as userFormActions from '../UserForm/actions'
 
 export function login(): ThunkAction {
   return dispatch => {
@@ -38,13 +39,15 @@ export function logout(): ThunkAction {
 }
 
 export function updateUser(user: User): ThunkAction {
-  return (dispatch, getState) => {
-    fdb
-      .ref(`user/${user.id}`)
-      .update(user)(user.macAddrs || [])
-      .forEach(ma => {
+  return async (dispatch, getState) => {
+    await dispatch(userFormActions.updateState({ loading: true }))
+    await fdb.ref(`user/${user.id}`).update(user)
+    if (user.macAddrs) {
+      user.macAddrs.forEach(ma => {
         fdb.ref(`macaddr-user/${ma}`).set(user.id)
       })
+    }
+    await dispatch(userFormActions.updateState({ loading: false }))
   }
 }
 
