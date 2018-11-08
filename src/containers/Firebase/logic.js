@@ -39,10 +39,12 @@ export function logout(): ThunkAction {
 
 export function updateUser(user: User): ThunkAction {
   return (dispatch, getState) => {
-    fdb.ref(`user/${user.id}`).update(user)
-    user.macAddrs.forEach(ma => {
-      fdb.ref(`macaddr-user/${ma}`).set(user.id)
-    })
+    fdb
+      .ref(`user/${user.id}`)
+      .update(user)(user.macAddrs || [])
+      .forEach(ma => {
+        fdb.ref(`macaddr-user/${ma}`).set(user.id)
+      })
   }
 }
 

@@ -29,23 +29,21 @@ class UserForm extends React.Component<Props> {
     }
     return (
       <form noValidate autoComplete="off">
-        <Grid container>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              label="名前"
-              inputRef={ref => (this.nameRef = ref)}
-              defaultValue={props.user.name || props.user.displayName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              label="Macアドレス"
-              helperText="複数登録はカンマ(,)区切り"
-              inputRef={ref => (this.macRef = ref)}
-              defaultValue={(props.user.macAddrs || []).join(',')}
-            />
-          </Grid>
-        </Grid>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <TextField
+            style={{ minWidth: '300px', paddingLeft: '8px' }}
+            label="名前"
+            inputRef={ref => (this.nameRef = ref)}
+            defaultValue={props.user.name || props.user.displayName}
+          />
+          <TextField
+            label="Macアドレス"
+            style={{ minWidth: '300px', paddingLeft: '8px' }}
+            helperText="複数登録はカンマ(,)区切り"
+            inputRef={ref => (this.macRef = ref)}
+            defaultValue={(props.user.macAddrs || []).join(',')}
+          />
+        </div>
         <Button
           variant="contained"
           color="primary"
