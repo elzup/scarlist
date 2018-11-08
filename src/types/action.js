@@ -6,6 +6,7 @@ import type { Action as RoomListContainerAction } from '../containers/RoomListCo
 import type { Action as RoomUserByIdAction } from '../containers/RoomUserById/actionTypes'
 import type { Action as SystemAction } from '../containers/System/actionTypes'
 import type { Action as UserByIdAction } from '../containers/UserById/actionTypes'
+import type { Action as UserFormAction } from '../containers/UserForm/actionTypes'
 
 export type ReduxInitAction = {
   type: '@@INIT',
@@ -20,3 +21,4 @@ export type Action =
   | RoomUserByIdAction
   | SystemAction
   | UserByIdAction
+  | UserFormAction

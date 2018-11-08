@@ -5,8 +5,6 @@ import type { State as RootState } from '../../types'
 import * as selectors from './selectors'
 import RoomInfo from '../RoomInfo'
 
-import Typography from '@material-ui/core/Typography'
-
 type Props = {
   roomIds: string[],
 }

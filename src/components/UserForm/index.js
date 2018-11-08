@@ -4,8 +4,9 @@ import type { User } from '../../types'
 import { TextField, Button } from '@material-ui/core'
 
 type Props = {
-  user: User,
+  user: ?User,
   updateUser: Function,
+  loading: boolean,
 }
 
 class UserForm extends React.Component<Props> {
@@ -23,21 +24,31 @@ class UserForm extends React.Component<Props> {
 
   render() {
     const { props } = this
+    if (!props.user) {
+      return <div>loading</div>
+    }
     return (
       <form noValidate autoComplete="off">
-        <TextField
-          label="名前"
-          inputRef={ref => (this.nameRef = ref)}
-          defaultValue={props.user.name || props.user.displayName}
-        />
-        <TextField
-          label="Macアドレス"
-          helperText="複数登録はカンマ(,)区切り"
-          inputRef={ref => (this.macRef = ref)}
-          defaultValue={props.user.macAddrs.join(',')}
-        />
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <TextField
+            style={{ minWidth: '300px', paddingLeft: '8px' }}
+            label="名前"
+            disabled={props.loading}
+            inputRef={ref => (this.nameRef = ref)}
+            defaultValue={props.user.name || props.user.displayName}
+          />
+          <TextField
+            style={{ minWidth: '300px', paddingLeft: '8px' }}
+            label="Macアドレス"
+            disabled={props.loading}
+            helperText="複数登録はカンマ(,)区切り"
+            inputRef={ref => (this.macRef = ref)}
+            defaultValue={(props.user.macAddrs || []).join(',')}
+          />
+        </div>
         <Button
           variant="contained"
+          disabled={props.loading}
           color="primary"
           onClick={this.onClickButton}
         >

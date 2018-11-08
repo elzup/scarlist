@@ -12,7 +12,7 @@ type Props = {
 }
 
 const TimestampLabel = (props: Props) => {
-  return <Typography variant="body1">{props.timestampStr}</Typography>
+  return <Typography>{props.timestampStr}</Typography>
 }
 
 const ms = (state: RootState) => ({

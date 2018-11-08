@@ -6,6 +6,7 @@ import RoomDayCountById from './containers/RoomDayCountById/reducer'
 import RoomListContainer from './containers/RoomListContainer/reducer'
 import System from './containers/System/reducer'
 import UserById from './containers/UserById/reducer'
+import UserForm from './containers/UserForm/reducer'
 
 export default combineReducers({
   Auth,
@@ -14,4 +15,5 @@ export default combineReducers({
   RoomListContainer,
   System,
   UserById,
+  UserForm,
 })

@@ -11,6 +11,7 @@ import { firebaseDb as fdb } from '../../services/firebase'
 import * as authActions from '../Auth/actions'
 import { receiveData } from '../TopContainer/logic'
 import { saveCounts } from '../RoomDayCountById/logic'
+import * as userFormActions from '../UserForm/actions'
 
 export function login(): ThunkAction {
   return dispatch => {
@@ -21,7 +22,8 @@ export function login(): ThunkAction {
       .then(async res => {
         const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
-        userRef.update(user)
+        userRef.set(user)
+        dispatch(authActions.login(user))
       })
   }
 }
@@ -37,23 +39,34 @@ export function logout(): ThunkAction {
 }
 
 export function updateUser(user: User): ThunkAction {
-  return (dispatch, getState) => {
-    fdb.ref(`user/${user.id}`).update(user)
-    user.macAddrs.forEach(ma => {
-      fdb.ref(`macaddr-user/${ma}`).set(user.id)
-    })
+  return async (dispatch, getState) => {
+    await dispatch(userFormActions.updateState({ loading: true }))
+    await fdb.ref(`user/${user.id}`).update(user)
+    if (user.macAddrs) {
+      user.macAddrs.forEach(ma => {
+        fdb.ref(`macaddr-user/${ma}`).set(user.id)
+      })
+    }
+    await dispatch(userFormActions.updateState({ loading: false }))
   }
 }
 
 async function omitUser(user: any): Promise<User> {
+  const userOldSnap = await fdb.ref(`user/${user.uid}`).once('value')
+  const userOld = userOldSnap.exists() ? userOldSnap.val() : user
+
   const macs = (await fdb.ref(`macaddr-user`).once('value')).val()
   const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
+  // 基本DBにあるユーザ情報優先
+  const displayName = userOld.displayName || user.displayName || 'no name'
+  const name = userOld.name || user.name || displayName
+  const photoURL = userOld.photoURL || user.photoURL || ''
   return {
     id: user.uid,
-    name: user.name,
-    displayName: user.displayName || 'no name',
-    photoURL: user.photoURL || '',
+    displayName,
+    photoURL,
     macAddrs,
+    name,
   }
 }
 
@@ -62,7 +75,11 @@ export function refInit(): ThunkAction {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         const userFull = (await fdb.ref(`user/${user.uid}`).once('value')).val()
-        dispatch(authActions.login(userFull))
+        if (userFull) {
+          dispatch(authActions.login(userFull))
+        } else {
+          dispatch(authActions.loginFailed())
+        }
       } else {
         dispatch(authActions.loginFailed())
       }

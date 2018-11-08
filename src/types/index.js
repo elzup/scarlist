@@ -23,7 +23,7 @@ export type User = {
   displayName: string,
   name?: string, // 自分で設定したもの
   photoURL: string,
-  macAddrs: string[],
+  macAddrs?: string[],
 }
 
 export type Auth =

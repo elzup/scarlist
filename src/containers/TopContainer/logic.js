@@ -49,7 +49,10 @@ function toRoom(
   const currentUsers = roomUsers.filter(user =>
     currentStart.isBefore(user.lastLog),
   )
-  const todayUsers = roomUsers.filter(user => todayStart.isBefore(user.lastLog))
+  const todayUsers = roomUsers.filter(
+    user =>
+      todayStart.isBefore(user.lastLog) && currentStart.isAfter(user.lastLog),
+  )
 
   return { ...room, id: roomId, currentUsers, todayUsers }
 }
