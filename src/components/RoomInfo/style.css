@@ -1,7 +1,7 @@
 .member-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .member-list > div {

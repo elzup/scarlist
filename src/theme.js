@@ -2,33 +2,24 @@
 
 import { createMuiTheme } from '@material-ui/core/styles'
 import orange from '@material-ui/core/colors/orange'
+import red from '@material-ui/core/colors/red'
 
 export const palette = {
-  type: 'dark',
-  primary: {
-    main: '#191c1f',
-    light: '#909090',
-    dark: '#212121',
-  },
-  secondary: orange,
+  primary: orange,
+  secondary: red,
 }
 
+const baseTheme = createMuiTheme({})
 const theme = createMuiTheme({
   palette,
   typography: {
     useNextVariants: true,
     h4: {
-      marginTop: '10px',
+      marginTop: '8px',
     },
     h6: {
-      padding: '10px',
+      padding: '8px',
     },
-  },
-  paper: {
-    padding: '10px',
-  },
-  tableCell: {
-    textAlign: 'center',
   },
   overrides: {
     MuiGrid: {
@@ -38,8 +29,11 @@ const theme = createMuiTheme({
     },
     MuiPaper: {
       root: {
-        marginTop: '20px',
-        padding: '5px',
+        marginTop: '8px',
+        padding: '8px',
+        [baseTheme.breakpoints.up('md')]: {
+          padding: '12px',
+        },
       },
     },
     MuiAppBar: {
@@ -48,31 +42,9 @@ const theme = createMuiTheme({
         margin: 0,
       },
     },
-    MuiChip: {
-      root: {
-        marginLeft: '10px',
-        height: '28px',
-      },
-      avatar: {
-        height: '28px',
-        width: '28px',
-      },
-    },
     MuiButton: {
       root: {
         minWidth: '60px',
-      },
-    },
-    MuiSvgIcon: {
-      root: {
-        width: '0.8em',
-        height: '0.8em',
-      },
-    },
-    MuiListItem: {
-      default: {
-        paddingTop: '3px',
-        paddingBottom: '3px',
       },
     },
   },

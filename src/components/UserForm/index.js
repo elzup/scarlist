@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { User } from '../../types'
+import { Grid } from '@material-ui/core'
 import { TextField, Button } from '@material-ui/core'
 
 type Props = {
@@ -28,17 +29,23 @@ class UserForm extends React.Component<Props> {
     }
     return (
       <form noValidate autoComplete="off">
-        <TextField
-          label="名前"
-          inputRef={ref => (this.nameRef = ref)}
-          defaultValue={props.user.name || props.user.displayName}
-        />
-        <TextField
-          label="Macアドレス"
-          helperText="複数登録はカンマ(,)区切り"
-          inputRef={ref => (this.macRef = ref)}
-          defaultValue={(props.user.macAddrs || []).join(',')}
-        />
+        <Grid container>
+          <Grid item xs={12} sm={12} md={6}>
+            <TextField
+              label="名前"
+              inputRef={ref => (this.nameRef = ref)}
+              defaultValue={props.user.name || props.user.displayName}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <TextField
+              label="Macアドレス"
+              helperText="複数登録はカンマ(,)区切り"
+              inputRef={ref => (this.macRef = ref)}
+              defaultValue={(props.user.macAddrs || []).join(',')}
+            />
+          </Grid>
+        </Grid>
         <Button
           variant="contained"
           color="primary"
