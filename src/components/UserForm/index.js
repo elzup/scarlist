@@ -18,7 +18,10 @@ class UserForm extends React.Component<Props> {
       return
     }
     const name = this.nameRef.value
-    const macAddrs = this.macRef.value.split(',').filter(v => !!v)
+    const macAddrs = this.macRef.value
+      .split(',')
+      .filter(v => !!v)
+      .map(v => v.toLowerCase().replace(/-/g, ':'))
     this.props.updateUser({ ...this.props.user, name, macAddrs })
   }
 
