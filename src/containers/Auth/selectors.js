@@ -12,3 +12,16 @@ export const getUser = (state: State): ?User => {
 }
 export const getIsLogin = (state: State) =>
   !state.Auth.loading && state.Auth.authorized
+
+export const getSetuped = (state: State) => {
+  const user = getUser(state)
+  return user && !!user.macAddrs
+}
+
+export const getConfirmedRooms = (state: State): false | string[] => {
+  const user = getUser(state)
+  if (!user || !user.loggedRooms || user.loggedRooms.length === 0) {
+    return false
+  }
+  return Object.keys(user.loggedRooms)
+}

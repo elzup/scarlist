@@ -109,6 +109,11 @@ function registerLog(roomId, userId, ym, d, h, timestamp) {
   countRef.child(`month/${ym}`).transaction(v => safeAdd(v, 1))
   countRef.child(`day/${ym}/${d}`).transaction(v => safeAdd(v, 1))
   countRef.child(`hour/${ym}/${d}/${h}`).transaction(v => safeAdd(v, 1))
+  admin
+    .database()
+    .ref(`/user/${userId}/loggedRooms`)
+    .child(roomId)
+    .set(true)
 
   roomUserRef.push().set({ timestamp })
 }

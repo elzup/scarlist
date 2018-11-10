@@ -12,7 +12,7 @@ import * as authActions from '../Auth/actions'
 import { receiveData } from '../TopContainer/logic'
 import { saveCounts } from '../RoomDayCountById/logic'
 import * as userFormActions from '../UserForm/actions'
-import { dataLoadingStart, dataLoadingEnd } from '../System/logic'
+import { getConfirmedRooms } from '../Auth/selectors'
 
 export function login(): ThunkAction {
   return dispatch => {
@@ -95,10 +95,17 @@ type RoomUserLogs = {
 }
 
 export function requestData(): ThunkAction {
-  return async dispatch => {
-    dispatch(dataLoadingStart())
-    const roomsRaw = (await fdb.ref(`room`).once('value')).val()
+  return async (dispatch, getState) => {
+    const confirmedRoomIds = getConfirmedRooms(getState())
+    if (!confirmedRoomIds) {
+      return
+    }
     const usersRaw = (await fdb.ref(`user`).once('value')).val()
+    const roomsRawAll = (await fdb.ref(`room`).once('value')).val()
+    const roomsRaw = _.pickBy(
+      roomsRawAll,
+      (v, k) => confirmedRoomIds.indexOf(k) !== -1,
+    )
     if (!roomsRaw || !usersRaw) {
       return
     }
@@ -123,6 +130,5 @@ export function requestData(): ThunkAction {
     }
 
     dispatch(receiveData({ roomsRaw, usersRaw, roomUserLogs }))
-    dispatch(dataLoadingEnd())
   }
 }

@@ -24,6 +24,7 @@ export type User = {
   name?: string, // 自分で設定したもの
   photoURL: string,
   macAddrs?: string[],
+  loggedRooms?: { [key: string]: true },
 }
 
 export type Auth =

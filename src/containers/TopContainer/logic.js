@@ -8,10 +8,13 @@ import * as roomActions from '../RoomById/actions'
 import * as roomListActions from '../RoomListContainer/actions'
 import * as userActions from '../UserById/actions'
 import { requestData } from '../Firebase/logic'
+import { dataLoadingStart, dataLoadingEnd } from '../System/logic'
 
 export function loadData(): ThunkAction {
   return async (dispatch, getState) => {
-    dispatch(requestData())
+    dispatch(dataLoadingStart())
+    await dispatch(requestData())
+    dispatch(dataLoadingEnd())
   }
 }
 
