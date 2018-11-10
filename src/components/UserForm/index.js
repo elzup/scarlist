@@ -42,7 +42,7 @@ class UserForm extends React.Component<Props> {
           />
           <TextField
             style={{ minWidth: '300px', paddingLeft: '8px' }}
-            label="Macアドレス"
+            label="MACアドレス"
             disabled={props.loading}
             helperText="複数登録はカンマ(,)区切り"
             inputRef={ref => (this.macRef = ref)}

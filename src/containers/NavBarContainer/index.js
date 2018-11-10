@@ -5,9 +5,18 @@ import { connect } from 'react-redux'
 import NavBar from '../../components/NavBar'
 import type { State } from '../../types'
 import { refInit } from '../Firebase/logic'
+import { getIsLogin } from '../Auth/selectors'
+import { withRouter, type RouterHistory } from 'react-router-dom'
 
 type Props = {
+  isLogin: boolean,
+  onClickSetting: () => void,
+  onClickTitle: () => void,
   refInit: typeof refInit,
+}
+
+type OProps = {
+  history: RouterHistory,
 }
 
 class NavBarContainer extends React.Component<Props> {
@@ -19,11 +28,19 @@ class NavBarContainer extends React.Component<Props> {
   }
 }
 
-const ms = (state: State) => ({})
+const ms = (state: State, op: OProps) => ({
+  isLogin: getIsLogin(state),
+  onClickTitle: () => {
+    op.history.push('/')
+  },
+  onClickSetting: () => {
+    op.history.push('/settings')
+  },
+})
 
 const conn = connect(
   ms,
   { refInit },
 )
 
-export default conn(NavBarContainer)
+export default withRouter(conn(NavBarContainer))
