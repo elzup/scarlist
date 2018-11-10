@@ -29,7 +29,7 @@ const configProduction = {
 const config = {
   isDev,
   tabBarHeight: 40,
-  currentUserLimit: 10 * 60, // seconds
+  currentUserLimit: 5 * 60, // seconds
   firebase: {
     apiKey: REACT_APP_FIREBASE_API_KEY || '',
     authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN || '',
