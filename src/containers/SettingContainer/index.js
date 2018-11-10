@@ -11,10 +11,6 @@ import { Page } from '../../components'
 
 type Props = {}
 
-const C = (props: Props) => {
-  return <div>{JSON.stringify(props)}</div>
-}
-
 class SettingContainer extends React.Component<Props> {
   render() {
     return (

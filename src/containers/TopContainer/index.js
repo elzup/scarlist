@@ -8,9 +8,6 @@ import RoomListContainer from '../RoomListContainer'
 import { loadData } from './logic'
 import { Page } from '../../components'
 // import * as selectors from './selectors'
-import UserForm from '../UserForm'
-import { Typography } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
 
 type Props = {
   loadData: typeof loadData,
