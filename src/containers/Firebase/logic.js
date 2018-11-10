@@ -12,6 +12,7 @@ import * as authActions from '../Auth/actions'
 import { receiveData } from '../TopContainer/logic'
 import { saveCounts } from '../RoomDayCountById/logic'
 import * as userFormActions from '../UserForm/actions'
+import { dataLoadingStart, dataLoadingEnd } from '../System/logic'
 
 export function login(): ThunkAction {
   return dispatch => {
@@ -95,6 +96,7 @@ type RoomUserLogs = {
 
 export function requestData(): ThunkAction {
   return async dispatch => {
+    dispatch(dataLoadingStart())
     const roomsRaw = (await fdb.ref(`room`).once('value')).val()
     const usersRaw = (await fdb.ref(`user`).once('value')).val()
     if (!roomsRaw || !usersRaw) {
@@ -121,5 +123,6 @@ export function requestData(): ThunkAction {
     }
 
     dispatch(receiveData({ roomsRaw, usersRaw, roomUserLogs }))
+    dispatch(dataLoadingEnd())
   }
 }

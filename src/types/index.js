@@ -79,6 +79,7 @@ export type RoomRaw = {
 }
 
 export type System = {
+  loadingData: boolean,
   timestamp: number,
   timestampStr: string,
 }

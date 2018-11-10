@@ -6,6 +6,28 @@ import * as actions from './actions'
 
 import config from '../../config'
 
+export function dataLoadingStart(): ThunkAction {
+  return (dispatch, getState) => {
+    dispatch(
+      actions.updateSystem({
+        ...getState().System,
+        loadingData: true,
+      }),
+    )
+  }
+}
+
+export function dataLoadingEnd(): ThunkAction {
+  return (dispatch, getState) => {
+    dispatch(
+      actions.updateSystem({
+        ...getState().System,
+        loadingData: false,
+      }),
+    )
+  }
+}
+
 export function startTimer(topicId: string): ThunkAction {
   return (dispatch, getState) => {
     setInterval(() => {

@@ -5,6 +5,7 @@ import { Actions } from './actionTypes'
 export type State = System
 
 const initialState: State = {
+  loadingData: false,
   timestamp: 0,
   timestampStr: '---',
 }
