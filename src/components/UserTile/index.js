@@ -67,7 +67,7 @@ const Photo = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
-  border: solid 4px red;
+  border: solid 4px green;
   &[data-timeout='true'] {
     border: solid 4px gray;
   }
