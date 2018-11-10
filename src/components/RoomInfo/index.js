@@ -14,7 +14,7 @@ type Props = {
 
 const RoomInfo = ({ room, roomCount }: Props) => {
   const currentCount = room.currentUsers.length
-  const todayCount = room.currentUsers.length
+  const todayCount = room.todayUsers.length
   return (
     <section>
       <header>
