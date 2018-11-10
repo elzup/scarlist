@@ -1,5 +1,13 @@
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
+const crypto = require('crypto')
+const token = functions.config().api.token
+
+const sha256 = crypto.createHash('sha256')
+const makeHash = s => {
+  sha256.update(s)
+  return sha256.digest('hex')
+}
 
 admin.initializeApp()
 
@@ -22,14 +30,18 @@ const safeAdd = (v, n) => (v || 0) + n
 const uniq = a => Array.from(new Set(a))
 
 const auth = content => {
-  return content !== functions.config().api.token
+  return content !== token
+}
+
+const auth2 = (content, room_id) => {
+  return content !== makeHash(token + room_id)
 }
 
 exports.log = functions.https.onRequest(async (req, res) => {
-  if (auth(req.headers.authorization)) {
-    return res.status(401).end()
-  }
   if (req.method === 'POST') {
+    if (auth(req.headers.authorization)) {
+      return res.status(401).end()
+    }
     const { room_id, mac_addrs } = req.body
     if (room_id && mac_addrs) {
       insertLogsByMac(room_id, mac_addrs)
@@ -41,6 +53,9 @@ exports.log = functions.https.onRequest(async (req, res) => {
     }
   } else if (req.method === 'GET') {
     const { room_id } = req.query
+    if (auth2(req.headers.authorization, room_id)) {
+      return res.status(401).end()
+    }
     const logs = await getLogs(room_id)
     res.status(200).send(logs)
   } else {
@@ -98,6 +113,12 @@ function registerLog(roomId, userId, ym, d, h, timestamp) {
   roomUserRef.push().set({ timestamp })
 }
 
+const userOmit = user => ({
+  displayName: user.displayName,
+  name: user.name,
+  photoURL: user.photoURL
+})
+
 async function getLogs(roomId) {
   const usersSnap = await admin
     .database()
@@ -111,7 +132,7 @@ async function getLogs(roomId) {
         .child(userId)
         .limitToLast(5)
         .once('value')
-      return { userId, logs: logsSnap.val() }
+      return { user: userOmit(users[userId]), last5Logs: logsSnap.val() }
     })
   )
 }
