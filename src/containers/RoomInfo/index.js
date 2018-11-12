@@ -4,14 +4,17 @@ import type { State as RootState } from '../../types'
 import { getRoom } from '../RoomById/selectors'
 import { getRoomCountToday } from '../RoomDayCountById/selectors'
 import RoomInfo from '../../components/RoomInfo'
+import { withWidth } from '@material-ui/core'
 
 type Props = {
   roomId: string,
+  width: string,
 }
 
 const ms = (state: RootState, op: Props) => ({
   room: getRoom(state, op.roomId),
   roomCount: getRoomCountToday(state, op.roomId),
+  lg: op.width === 'lg' || op.width === 'xl',
 })
 
 const conn = connect(
@@ -19,4 +22,4 @@ const conn = connect(
   {},
 )
 
-export default conn(RoomInfo)
+export default withWidth()(conn(RoomInfo))

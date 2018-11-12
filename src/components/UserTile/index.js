@@ -55,8 +55,7 @@ const Wrapper = styled(Paper)`
 `
 
 export const ImgWrapper = styled.div`
-  width: 15vw;
-  height: 15vw;
+  width: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -65,8 +64,10 @@ export const ImgWrapper = styled.div`
 export const Photo = styled.img`
   border-radius: 50%;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-position: center center;
   object-fit: cover;
+
   border: solid 4px green;
   &[data-timeout='true'] {
     border: solid 4px gray;

@@ -100,9 +100,17 @@ addDecorator(storyFn => (
   </div>
 ))
 
-storiesOf('RoomInfo', module).add('room1', () => (
-  <RoomInfo room={room} roomCount={{ id: 'a', users: countData }} />
-))
+storiesOf('RoomInfo', module)
+  .add('room1 no lg', () => (
+    <RoomInfo
+      room={room}
+      roomCount={{ id: 'a', users: countData }}
+      lg={false}
+    />
+  ))
+  .add('room1 lg', () => (
+    <RoomInfo room={room} roomCount={{ id: 'a', users: countData }} lg={true} />
+  ))
 
 storiesOf('UserTile', module)
   .add('user', () => <UserTile roomUser={roomUser} />)
