@@ -5,7 +5,7 @@ import type { State as RootState } from '../../types'
 import * as selectors from './selectors'
 import RoomInfo from '../RoomInfo'
 import { getLoadingData } from '../System/selectors'
-import { getConfirmedRooms, getAuth, getSetuped } from '../Auth/selectors'
+import { getConfirmedRooms, getSetuped } from '../Auth/selectors'
 import { LinearProgress, Typography } from '@material-ui/core'
 
 type Props = {
@@ -24,7 +24,7 @@ class RoomListContainer extends React.Component<Props> {
     if (!props.confirmedRooms) {
       return (
         <>
-          <Typography color={props.isSetuped ? 'defualt' : 'secondary'}>
+          <Typography color={props.isSetuped ? 'default' : 'secondary'}>
             1. 右上の設定ボタンからMACアドレスの設定を行ってください。
           </Typography>
           <Typography color="secondary">

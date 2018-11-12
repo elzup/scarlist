@@ -62,12 +62,14 @@ async function omitUser(user: any): Promise<User> {
   const displayName = userOld.displayName || user.displayName || 'no name'
   const name = userOld.name || user.name || displayName
   const photoURL = user.photoURL || userOld.photoURL || ''
+  const loggedRooms = userOld.loggedRooms || {}
   return {
     id: user.uid,
     displayName,
     photoURL,
     macAddrs,
     name,
+    loggedRooms,
   }
 }
 
