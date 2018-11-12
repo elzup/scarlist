@@ -14,10 +14,13 @@ import { Tab } from '@material-ui/core'
 import { Tabs } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import SwipeableViews from 'react-swipeable-views'
+import { Button } from '@material-ui/core'
+import { logout } from '../Firebase/logic'
 
 type Props = {
   loadData: typeof loadData,
   roomIds: string[],
+  logout: typeof logout,
 }
 
 type State = {
@@ -31,6 +34,7 @@ class TopContainer extends React.Component<Props, State> {
   }
 
   render() {
+    const { props } = this
     return (
       <div>
         <Page>
@@ -63,6 +67,15 @@ class TopContainer extends React.Component<Props, State> {
               <Paper>
                 <MacAddrDescription />
               </Paper>
+              <Paper>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={props.logout}
+                >
+                  ログアウトする
+                </Button>
+              </Paper>
             </div>
           </SwipeableViews>
         </Page>
@@ -75,7 +88,7 @@ const ms = (state: RootState) => ({})
 
 const conn = connect(
   ms,
-  { loadData },
+  { loadData, logout },
 )
 
 export default conn(TopContainer)

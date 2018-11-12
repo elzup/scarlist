@@ -21,10 +21,10 @@ export type ThunkAction = (
 export type User = {
   id: string,
   displayName: string,
-  name?: string, // 自分で設定したもの
+  name: string, // 自分で設定したもの
   photoURL: string,
-  macAddrs?: string[],
-  loggedRooms?: { [key: string]: true },
+  macAddrs: string[],
+  loggedRooms: { [key: string]: true },
 }
 
 export type Auth =

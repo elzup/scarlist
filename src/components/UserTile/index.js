@@ -54,7 +54,7 @@ const Wrapper = styled(Paper)`
   }
 `
 
-const ImgWrapper = styled.div`
+export const ImgWrapper = styled.div`
   width: 15vw;
   height: 15vw;
   margin: auto;
@@ -62,7 +62,7 @@ const ImgWrapper = styled.div`
   justify-content: center;
 `
 
-const Photo = styled.img`
+export const Photo = styled.img`
   border-radius: 50%;
   width: 100%;
   height: auto;

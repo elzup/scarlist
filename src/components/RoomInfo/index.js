@@ -18,7 +18,7 @@ const RoomInfo = ({ room, roomCount }: Props) => {
   return (
     <section>
       <header>
-        <Typography variant="h4">{room.id}</Typography>
+        <Typography variant="h4">{room.label}</Typography>
       </header>
       <section>
         <Typography variant="h5">now</Typography>

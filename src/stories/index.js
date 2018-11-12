@@ -8,14 +8,24 @@ import { storiesOf, addDecorator } from '@storybook/react'
 import UserTile from '../components/UserTile'
 import RoomInfo from '../components/RoomInfo'
 import DayHeatMap from '../components/DayHeatMap'
-import type { RoomUser, Room } from '../types'
+import type { RoomUser, Room, User } from '../types'
 import { GlobalStyle } from '../components'
 import CssBaseline from '@material-ui/core/CssBaseline'
+
+const user0: User = {
+  id: '',
+  photoURL: '',
+  displayName: '',
+  name: '',
+  macAddrs: [],
+  loggedRooms: {},
+}
 
 const roomUser: RoomUser = {
   lastLogLabel: '2018-10-05T18:50:10+09:00',
   lastLogFromNowLabel: '2時間前',
   user: {
+    ...user0,
     id: 'elzup',
     photoURL:
       'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
@@ -29,6 +39,7 @@ const roomUser2: RoomUser = {
   lastLogLabel: '2018-10-05T18:50:10+09:00',
   lastLogFromNowLabel: '5分前',
   user: {
+    ...user0,
     id: 'anozon',
     photoURL:
       'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
@@ -42,6 +53,7 @@ const roomUser3: RoomUser = {
   lastLogLabel: '2018-10-05T18:50:10+09:00',
   lastLogFromNowLabel: '1分前',
   user: {
+    ...user0,
     id: 'anozon',
     photoURL:
       'https://66.media.tumblr.com/7807fcf0fba173ede2c46318cedabd81/tumblr_p1vavmvWgZ1ttrer8o1_400.png',
