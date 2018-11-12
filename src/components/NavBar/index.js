@@ -8,25 +8,15 @@ import SettingsIcon from '@material-ui/icons/Settings'
 
 type Props = {
   isLogin: boolean,
-  onClickSetting: Function,
-  onClickTitle: Function,
 }
 
 const NavBar = (props: Props) => (
   <div>
     <AppBar position="static" color="primary">
       <Toolbar color="inherit">
-        <Typography
-          variant="h6"
-          color="inherit"
-          style={{ flex: 1 }}
-          onClick={props.onClickTitle}
-        >
+        <Typography variant="h6" color="inherit" style={{ flex: 1 }}>
           ScarList
         </Typography>
-        <IconButton onClick={props.onClickSetting} color="inherit">
-          <SettingsIcon />
-        </IconButton>
       </Toolbar>
     </AppBar>
   </div>
