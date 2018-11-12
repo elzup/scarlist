@@ -61,7 +61,7 @@ async function omitUser(user: any): Promise<User> {
   // 基本DBにあるユーザ情報優先
   const displayName = userOld.displayName || user.displayName || 'no name'
   const name = userOld.name || user.name || displayName
-  const photoURL = userOld.photoURL || user.photoURL || ''
+  const photoURL = user.photoURL || userOld.photoURL || ''
   return {
     id: user.uid,
     displayName,
