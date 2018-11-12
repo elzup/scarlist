@@ -24,7 +24,10 @@ export default function(state: State = initialState, action: Action): State {
       }
 
     case Actions.LOGOUT:
-      return initialState
+      return {
+        loading: false,
+        authorized: false,
+      }
 
     default:
       return state
