@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom'
 
 import type { State, Auth } from '../../types'
 import { getAuth } from './selectors'
+import { CircularProgress } from '@material-ui/core'
 
 type OProps = {
   redirectPath: string,
@@ -19,7 +20,11 @@ type Props = {
 
 const AuthContainer = (props: Props) => {
   if (props.auth.loading) {
-    return <span>loading</span>
+    return (
+      <div style={{ margin: '1em' }}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
   } else if (props.auth.authorized) {
     return <Route children={props.children} />
   } else {

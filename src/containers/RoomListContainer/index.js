@@ -6,7 +6,8 @@ import * as selectors from './selectors'
 import RoomInfo from '../RoomInfo'
 import { getLoadingData } from '../System/selectors'
 import { getConfirmedRooms, getSetuped } from '../Auth/selectors'
-import { LinearProgress, Typography } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 type Props = {
   roomIds: string[],
@@ -19,7 +20,11 @@ class RoomListContainer extends React.Component<Props> {
   render() {
     const { props } = this
     if (props.isLoading) {
-      return <LinearProgress color="secondary" />
+      return (
+        <div style={{ margin: '1em' }}>
+          <CircularProgress color="secondary" />
+        </div>
+      )
     }
     if (!props.confirmedRooms) {
       return (
