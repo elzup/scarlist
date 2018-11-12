@@ -33,7 +33,7 @@ class UserForm extends React.Component<Props> {
     }
     return (
       <form noValidate autoComplete="off">
-        <ImgWrapper>
+        <ImgWrapper style={{ width: '100px' }}>
           <Photo data-timeout={true} src={props.user.photoURL} alt="" />
         </ImgWrapper>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
