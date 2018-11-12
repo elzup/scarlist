@@ -6,18 +6,13 @@ import NavBar from '../../components/NavBar'
 import type { State } from '../../types'
 import { refInit } from '../Firebase/logic'
 import { getIsLogin } from '../Auth/selectors'
-import { withRouter, type RouterHistory } from 'react-router-dom'
 
 type Props = {
   isLogin: boolean,
-  onClickSetting: () => void,
-  onClickTitle: () => void,
   refInit: typeof refInit,
 }
 
-type OProps = {
-  history: RouterHistory,
-}
+type OProps = {}
 
 class NavBarContainer extends React.Component<Props> {
   componentDidMount() {
@@ -30,12 +25,6 @@ class NavBarContainer extends React.Component<Props> {
 
 const ms = (state: State, op: OProps) => ({
   isLogin: getIsLogin(state),
-  onClickTitle: () => {
-    op.history.push('/')
-  },
-  onClickSetting: () => {
-    op.history.push('/settings')
-  },
 })
 
 const conn = connect(
@@ -43,4 +32,4 @@ const conn = connect(
   { refInit },
 )
 
-export default withRouter(conn(NavBarContainer))
+export default conn(NavBarContainer)
