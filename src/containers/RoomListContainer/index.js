@@ -33,7 +33,8 @@ class RoomListContainer extends React.Component<Props> {
             1. 右上の設定ボタンからMACアドレスの設定を行ってください。
           </Typography>
           <Typography color="secondary">
-            2. 在室者を閲覧するには1度以上ログが確認される必要があります。
+            2.
+            在室者を閲覧するには各アクセスポイントで1度以上ログを残す必要があります。
           </Typography>
         </>
       )
