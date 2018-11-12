@@ -2,7 +2,6 @@
 
 import React from 'react'
 import TopContainer from '../TopContainer'
-import SettingContainer from '../SettingContainer'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import LoginPage from '../LoginPage'
 import Auth from '../Auth'
@@ -20,11 +19,6 @@ class App extends React.Component<*> {
               <div>
                 <Switch>
                   <Route exact path={'/'} component={TopContainer} />
-                  <Route
-                    exact
-                    path={'/settings'}
-                    component={SettingContainer}
-                  />
                 </Switch>
               </div>
             </Auth>
