@@ -67,7 +67,7 @@ const room: Room = {
   id: 'planck_units',
   label: 'planck_units',
   currentUsers: [roomUser2, roomUser3],
-  todayUsers: [roomUser, roomUser2, roomUser3],
+  todayUsers: [roomUser, roomUser2, roomUser3, roomUser3, roomUser3, roomUser3],
 }
 
 const keys24 = _.range(24).map(v => _.padStart(`${v}`, 2, '0'))
@@ -101,15 +101,41 @@ addDecorator(storyFn => (
 ))
 
 storiesOf('RoomInfo', module)
-  .add('room1 no lg', () => (
-    <RoomInfo
-      room={room}
-      roomCount={{ id: 'a', users: countData }}
-      lg={false}
-    />
+  .add('room1 xs', () => (
+    <div style={{ width: '590px', border: '2px solid gray' }}>
+      <RoomInfo
+        room={room}
+        roomCount={{ id: 'a', users: countData }}
+        bp={'xs'}
+      />
+    </div>
+  ))
+  .add('room1 sm', () => (
+    <div style={{ width: '800px', border: '2px solid gray' }}>
+      <RoomInfo
+        room={room}
+        roomCount={{ id: 'a', users: countData }}
+        bp={'sm'}
+      />
+    </div>
+  ))
+  .add('room1 md', () => (
+    <div style={{ width: '1000px', border: '2px solid gray' }}>
+      <RoomInfo
+        room={room}
+        roomCount={{ id: 'a', users: countData }}
+        bp={'md'}
+      />
+    </div>
   ))
   .add('room1 lg', () => (
-    <RoomInfo room={room} roomCount={{ id: 'a', users: countData }} lg={true} />
+    <div style={{ width: '1280px', border: '2px solid gray' }}>
+      <RoomInfo
+        room={room}
+        roomCount={{ id: 'a', users: countData }}
+        bp={'lg'}
+      />
+    </div>
   ))
 
 storiesOf('UserTile', module)
