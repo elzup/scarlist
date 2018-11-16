@@ -7,17 +7,30 @@ import styled from 'styled-components'
 
 import { Typography } from '@material-ui/core'
 
+type Bp = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
 type Props = {
   room: Room,
   roomCount: RoomDayCounts,
-  lg: boolean,
+  bp: Bp,
 }
 
-const RoomInfo = ({ room, roomCount, lg }: Props) => {
+const colNum = (bp: Bp, isSub: boolean) => {
+  return {
+    xs: [4, 4],
+    sm: [5, 6],
+    md: [6, 8],
+    lg: [8, 10],
+    xl: [10, 12],
+  }[bp][isSub ? 1 : 0]
+}
+
+const RoomInfo = ({ room, roomCount, bp }: Props) => {
   const currentCount = room.currentUsers.length
   const todayCount = room.todayUsers.length
   // column num
-  const cn = lg ? 6 : 4
+  const cn = colNum(bp, false)
+  const cnSub = colNum(bp, true)
 
   return (
     <section>
@@ -39,13 +52,13 @@ const RoomInfo = ({ room, roomCount, lg }: Props) => {
         </MemberList>
         <Typography variant="h5">leaved</Typography>
         {todayCount === 0 && <Typography>none</Typography>}
-        <MemberList cn={cn}>
+        <MemberList cn={cnSub}>
           {room.todayUsers.map(user => (
             <div key={user.user.id}>
               <UserTile roomUser={user} timeout />
             </div>
           ))}
-          {_.range(cn - (todayCount % cn)).map(i => (
+          {_.range(cnSub - (todayCount % cnSub)).map(i => (
             <div key={i} />
           ))}
         </MemberList>

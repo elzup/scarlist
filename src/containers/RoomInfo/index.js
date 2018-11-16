@@ -14,7 +14,7 @@ type Props = {
 const ms = (state: RootState, op: Props) => ({
   room: getRoom(state, op.roomId),
   roomCount: getRoomCountToday(state, op.roomId),
-  lg: op.width === 'lg' || op.width === 'xl',
+  bp: op.width,
 })
 
 const conn = connect(
