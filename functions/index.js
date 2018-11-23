@@ -101,6 +101,8 @@ async function insertLogsByMac(roomId, macAddrs) {
   userIds.forEach(userId => {
     registerLog(roomId, userId, ym, d, h, timestamp)
   })
+  const currentRoomRef = admin.database().ref(`/current-room/${roomId}`)
+  currentRoomRef.update({})
 }
 
 function registerLog(roomId, userId, ym, d, h, timestamp) {

@@ -37,6 +37,27 @@
         }
       }
     },
+    "current-room": {
+      "$roomId": {
+        "currentUsers": {
+          "$userId": {
+            "id": { ".validate": "(newData.isString())" },
+            "displayName": { ".validate": "(newData.isString())" },
+            "name": { ".validate": "(newData.isString())" },
+            "photoURL": { ".validate": "(newData.isString())" },
+            "lastLog": { ".validate": "(newData.isNumber())" }
+          }
+        },
+        "todayUsers": {
+          "$userId": {
+            "id": { ".validate": "(newData.isString())" },
+            "displayName": { ".validate": "(newData.isString())" },
+            "name": { ".validate": "(newData.isString())" },
+            "photoURL": { ".validate": "(newData.isString())" }
+          }
+        }
+      }
+    },
     "room-user-count": {
       "$roomId": {
         "$userId": {

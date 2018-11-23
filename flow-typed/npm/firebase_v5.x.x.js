@@ -1,5 +1,5 @@
-// flow-typed signature: dd3937a2dc9f124d12f93d82edaafa2c
-// flow-typed version: bda9fc5659/firebase_v5.x.x/flow_>=v0.34.x
+// flow-typed signature: 97168ffd3035c737dd744207f182eda9
+// flow-typed version: a1a8d3661a/firebase_v5.x.x/flow_>=v0.34.x
 
 /* @flow */
 /** ** firebase ****/
@@ -477,7 +477,7 @@ declare class $npm$firebase$firestore$Firestore {
   collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   doc(documentPath: string): $npm$firebase$firestore$DocumentReference;
   enablePersistence(): Promise<void>;
-  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<mixed>;
+  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<any>;
   setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
   settings(settings: $npm$firebase$firestore$Settings): void;
   getAll(
@@ -530,7 +530,7 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: Object): Promise<mixed>;
+  add(data: Object): Promise<$npm$firebase$firestore$DocumentReference>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
@@ -542,7 +542,7 @@ declare class $npm$firebase$firestore$DocumentReference {
   firestore: $npm$firebase$firestore$Firestore;
   id: string;
   parent: typeof $npm$firebase$firestore$CollectionReference;
-  collection(collectionPath: string): typeof $npm$firebase$firestore$CollectionReference;
+  collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   delete(): Promise<void>;
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   onSnapshot(
@@ -552,7 +552,7 @@ declare class $npm$firebase$firestore$DocumentReference {
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): Function;
-  set(data: Object, options?: { merge: boolean } | null): Promise<void>;
+  set(data: Object, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
