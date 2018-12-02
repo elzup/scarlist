@@ -107,7 +107,9 @@ async function insertLogsByMac(roomId, macAddrs) {
 
 function registerLog(roomId, userId, ym, d, h, timestamp) {
   const roomUserRef = admin.database().ref(`/room-user-log/${roomId}/${userId}`)
+  const roomCurrentRef = admin.database().ref(`/room/user-last/${userId}`)
   const countRef = admin.database().ref(`/room-user-count/${roomId}/${userId}`)
+  roomCurrentRef.update(timestamp)
   countRef.child(`month/${ym}`).transaction(v => safeAdd(v, 1))
   countRef.child(`day/${ym}/${d}`).transaction(v => safeAdd(v, 1))
   countRef.child(`hour/${ym}/${d}/${h}`).transaction(v => safeAdd(v, 1))

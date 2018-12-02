@@ -13,9 +13,9 @@
         "label": {
           ".validate": "(newData.isString())"
         },
-        "user": {
+        "user-last": {
           "$userId": {
-            "timestamp": "(newData.isNumber())"
+            ".validate": "(newData.isNumber())"
           }
         }
       }
