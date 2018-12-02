@@ -10,7 +10,14 @@
     "room": {
       "$roomId": {
         ".validate": "newData.hasChildren(['label'])",
-        "label": { ".validate": "(newData.isString())" }
+        "label": {
+          ".validate": "(newData.isString())"
+        },
+        "user": {
+          "$userId": {
+            "timestamp": "(newData.isNumber())"
+          }
+        }
       }
     },
     "user": {
@@ -33,27 +40,6 @@
         "$userId": {
           "$logId": {
             ".validate": "(newData.hasChildren([]))"
-          }
-        }
-      }
-    },
-    "current-room": {
-      "$roomId": {
-        "currentUsers": {
-          "$userId": {
-            "id": { ".validate": "(newData.isString())" },
-            "displayName": { ".validate": "(newData.isString())" },
-            "name": { ".validate": "(newData.isString())" },
-            "photoURL": { ".validate": "(newData.isString())" },
-            "lastLog": { ".validate": "(newData.isNumber())" }
-          }
-        },
-        "todayUsers": {
-          "$userId": {
-            "id": { ".validate": "(newData.isString())" },
-            "displayName": { ".validate": "(newData.isString())" },
-            "name": { ".validate": "(newData.isString())" },
-            "photoURL": { ".validate": "(newData.isString())" }
           }
         }
       }

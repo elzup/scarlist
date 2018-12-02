@@ -103,7 +103,9 @@ export function requestData(): ThunkAction {
       return
     }
     const usersRaw = (await fdb.ref(`user`).once('value')).val()
+    console.log(usersRaw)
     const roomsRawAll = (await fdb.ref(`room`).once('value')).val()
+    console.log(roomsRawAll)
     const roomsRaw = _.pickBy(
       roomsRawAll,
       (v, k) => confirmedRoomIds.indexOf(k) !== -1,
