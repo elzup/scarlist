@@ -1,11 +1,9 @@
-
-
 <div align="center">
 <img style="max-width:100%;" alt="scarlist_icon" src="https://raw.githubusercontent.com/elzup/scarlist/master/public/icon-4x.png" />
-  <p>Scarlist</p>
+
 </div>
 
-
+# Scarlist
 > Occupancy management web app
 
 ![image](https://user-images.githubusercontent.com/2284908/49385637-3a7da000-f761-11e8-9c60-d29c285aa6e0.png)
