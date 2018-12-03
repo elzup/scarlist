@@ -2,7 +2,7 @@
 
 <div align="center">
 <img style="max-width:100%;" alt="scarlist_icon" src="https://raw.githubusercontent.com/elzup/scarlist/master/public/icon-4x.png" />
-  <h2><Scarlist</h2>
+  <p>Scarlist</p>
 </div>
 
 
