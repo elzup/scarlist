@@ -71,8 +71,8 @@ export type RoomUser = {
 export type Room = {
   id: string,
   label: string,
-  currentUsers: string[],
-  todayUsers: string[],
+  currentUsers: Array<{ id: string, timestamp: number }>,
+  todayUsers: Array<{ id: string, timestamp: number }>,
 }
 
 export type RoomRaw = {

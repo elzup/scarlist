@@ -53,8 +53,8 @@ const RoomInfo = ({ room, roomCount, bp }: Props) => {
         {currentCount === 0 && <Typography>none</Typography>}
         <MemberList cn={cn}>
           {room.currentUsers.map(user => (
-            <div key={user.user.id}>
-              <UserTile roomUser={user} />
+            <div key={user.id}>
+              <UserTile userId={user.id} timestamp={user.timestamp} />
             </div>
           ))}
           {_.range(cn - (currentCount % cn)).map(i => (
@@ -65,8 +65,8 @@ const RoomInfo = ({ room, roomCount, bp }: Props) => {
         {todayCount === 0 && <Typography>none</Typography>}
         <MemberList cn={cnSub}>
           {room.todayUsers.map(user => (
-            <div key={user.user.id}>
-              <UserTile roomUser={user} timeout />
+            <div key={user.id}>
+              <UserTile userId={user.id} timestamp={user.timestamp} timeout />
             </div>
           ))}
           {_.range(cnSub - (todayCount % cnSub)).map(i => (

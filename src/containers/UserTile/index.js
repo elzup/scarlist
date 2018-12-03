@@ -3,25 +3,22 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import type { State as RootState } from '../../types'
 // import * as selectors from './selectors'
+import UserTile from '../../components/UserTile'
+import { getRoomUser } from './selectors'
 
-type Props = {}
-
-const C = (props: Props) => {
-  return <div>{JSON.stringify(props)}</div>
+type OProps = {
+  userId: string,
+  timestamp: number,
+  timeout?: boolean,
 }
 
-class UserTile extends React.Component<Props> {
-	render() {
-		const { props } = this
-		return C(props)
-	}
-}
-
-const ms = (state: RootState) => ({})
+const ms = (state: RootState, op: OProps) => ({
+  roomUser: getRoomUser(state, op.userId, op.timestamp),
+})
 
 const conn = connect(
-	ms,
-	{},
+  ms,
+  {},
 )
 
 export default conn(UserTile)

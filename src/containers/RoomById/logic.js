@@ -1,9 +1,8 @@
 // @flow
 import moment from 'moment'
 
-import type { ThunkAction, User, RoomRaw, Room } from '../../types'
+import type { ThunkAction, RoomRaw, Room } from '../../types'
 import * as actions from './actions'
-import * as selectors from './selectors'
 import config from '../../config'
 import _ from 'lodash'
 
@@ -28,12 +27,12 @@ function toRoom(id: string, room: RoomRaw): Room {
 
   const currentUsers = []
   const todayUsers = []
-  console.log({ todayStart, currentStart, room })
-  _.each(room.userLast, (v, k) => {
-    if (todayStart >= v) {
-      todayUsers.push(k)
-    } else if (currentStart >= v) {
-      currentUsers.push(k)
+
+  _.each(room.userLast, (timestamp, id) => {
+    if (todayStart >= timestamp) {
+      todayUsers.push({ id, timestamp })
+    } else if (currentStart >= timestamp) {
+      currentUsers.push({ id, timestamp })
     }
   })
 
