@@ -71,12 +71,13 @@ export type RoomUser = {
 export type Room = {
   id: string,
   label: string,
-  currentUsers: RoomUser[],
-  todayUsers: RoomUser[],
+  currentUsers: string[],
+  todayUsers: string[],
 }
 
 export type RoomRaw = {
   label: string,
+  userLast: { [id: string]: number },
 }
 
 export type System = {

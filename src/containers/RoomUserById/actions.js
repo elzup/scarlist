@@ -7,12 +7,12 @@ import type { ReceiveLogs } from './actionTypes'
 export function receiveLogs(
   userId: string,
   roomId: string,
-  logs: Log[],
+  log: Log,
 ): ReceiveLogs {
   return {
     type: RECEIVE_LOGS,
     userId,
     roomId,
-    logs,
+    log,
   }
 }
