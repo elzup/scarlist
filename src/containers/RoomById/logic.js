@@ -29,10 +29,10 @@ function toRoom(id: string, room: RoomRaw): Room {
   const todayUsers = []
 
   _.each(room.userLast, (timestamp, id) => {
-    if (timestamp >= todayStart) {
-      todayUsers.push({ id, timestamp })
-    } else if (timestamp >= currentStart) {
+    if (timestamp >= currentStart) {
       currentUsers.push({ id, timestamp })
+    } else if (timestamp >= todayStart) {
+      todayUsers.push({ id, timestamp })
     }
   })
 
