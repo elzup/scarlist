@@ -1,6 +1,5 @@
 // @flow
 
-import _ from 'lodash'
 import type { ThunkAction } from '../../types'
 import { requestData } from '../Firebase/logic'
 import { dataLoadingStart, dataLoadingEnd } from '../System/logic'

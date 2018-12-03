@@ -62,7 +62,7 @@ export type RoomDayCounts = {
 }
 
 export type RoomUser = {
-  user: User,
+  user?: User,
   lastLogLabel: string,
   lastLogFromNowLabel: string,
   lastLog: number, //timestamps

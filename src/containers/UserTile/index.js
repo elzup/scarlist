@@ -1,5 +1,4 @@
 // @flow
-import * as React from 'react'
 import { connect } from 'react-redux'
 import type { State as RootState } from '../../types'
 // import * as selectors from './selectors'
