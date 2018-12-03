@@ -1,23 +1,12 @@
 # scarlist
+Occupancy management web app
 
-## Contribute
+![image](https://user-images.githubusercontent.com/2284908/49385637-3a7da000-f761-11e8-9c60-d29c285aa6e0.png)
 
-### react component 開発
 
-- react だけ出来る人も是非。
-- material-ui replace していっていいです。
-- component ディレクトリ -> src/components
-- storybook があるので app を起動せずに開発できます。
+## Structure
+![image](https://user-images.githubusercontent.com/2284908/49385796-90524800-f761-11e8-8067-b9f38cf332ac.png)
 
-```
-$ yarn
-$ yarn run storybook
-$ open localhost:9009
-```
+## Logger
 
-### redux 開発
-
-- s2s と firebase を使っています。
-- firebase は /src/containers/Firebase/logic.js で call しています。
-
-## システム概念図
+[elzup/scarlist-logger](https://github.com/elzup/scarlist-logger)
