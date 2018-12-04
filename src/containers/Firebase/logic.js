@@ -110,7 +110,9 @@ export function requestData(): ThunkAction {
           Object.keys(roomRaw.userLast).forEach(k => userIds.push(k))
         }
         dispatch(saveRoom(roomId, roomRaw))
-        roomRef.child(roomId).on('child_changed', snap => {})
+        roomRef.child(roomId).on('child_changed', snap => {
+          dispatch(saveRoom(roomId, snap.val()))
+        })
       }),
     )
 
