@@ -12,6 +12,9 @@ type Props = {
 const UserTile = (props: Props) => {
   const { roomUser, timeout } = props
   const { user } = roomUser
+  if (!user) {
+    return <p>...</p>
+  }
   return (
     <Wrapper data-timeout={timeout}>
       <ImgWrapper>

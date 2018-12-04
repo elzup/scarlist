@@ -10,7 +10,14 @@
     "room": {
       "$roomId": {
         ".validate": "newData.hasChildren(['label'])",
-        "label": { ".validate": "(newData.isString())" }
+        "label": {
+          ".validate": "(newData.isString())"
+        },
+        "userLast": {
+          "$userId": {
+            ".validate": "(newData.isNumber())"
+          }
+        }
       }
     },
     "user": {

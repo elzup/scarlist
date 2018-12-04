@@ -12,7 +12,7 @@ export type ReceiveLogs = {
   type: typeof RECEIVE_LOGS,
   userId: string,
   roomId: string,
-  logs: Log[],
+  log: Log,
 }
 
 export type Action = ReceiveLogs

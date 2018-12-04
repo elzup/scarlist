@@ -62,7 +62,7 @@ export type RoomDayCounts = {
 }
 
 export type RoomUser = {
-  user: User,
+  user?: User,
   lastLogLabel: string,
   lastLogFromNowLabel: string,
   lastLog: number, //timestamps
@@ -71,12 +71,13 @@ export type RoomUser = {
 export type Room = {
   id: string,
   label: string,
-  currentUsers: RoomUser[],
-  todayUsers: RoomUser[],
+  currentUsers: Array<{ id: string, timestamp: number }>,
+  todayUsers: Array<{ id: string, timestamp: number }>,
 }
 
 export type RoomRaw = {
   label: string,
+  userLast: { [id: string]: number },
 }
 
 export type System = {

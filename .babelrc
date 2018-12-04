@@ -1,0 +1,16 @@
+{
+  "presets": ["react-app"],
+  "plugins": [
+    ["lodash"],
+    [
+      "import",
+      [
+        {
+          "libraryName": "@material-ui/core",
+          "libraryDirectory": "",
+          "camel2DashComponentName": false
+        }
+      ]
+    ]
+  ]
+}

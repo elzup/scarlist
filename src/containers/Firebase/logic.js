@@ -9,10 +9,11 @@ import type { ThunkAction, User } from '../../types'
 import { firebaseDb as fdb } from '../../services/firebase'
 // import * as actions from './actions'
 import * as authActions from '../Auth/actions'
-import { receiveData } from '../TopContainer/logic'
-import { saveCounts } from '../RoomDayCountById/logic'
 import * as userFormActions from '../UserForm/actions'
 import { getConfirmedRooms } from '../Auth/selectors'
+import { receiveUser } from '../UserById/actions'
+import { receiveRoomList } from '../RoomListContainer/actions'
+import { saveRoom } from '../RoomById/logic'
 
 export function login(): ThunkAction {
   return dispatch => {
@@ -90,47 +91,34 @@ export function refInit(): ThunkAction {
   }
 }
 
-type RoomUserLogs = {
-  [roomId: string]: {
-    [userId: string]: { [logId: string]: { timestamp: number } },
-  },
-}
-
 export function requestData(): ThunkAction {
   return async (dispatch, getState) => {
     const confirmedRoomIds = getConfirmedRooms(getState())
     if (!confirmedRoomIds) {
       return
     }
-    const usersRaw = (await fdb.ref(`user`).once('value')).val()
-    const roomsRawAll = (await fdb.ref(`room`).once('value')).val()
-    const roomsRaw = _.pickBy(
-      roomsRawAll,
-      (v, k) => confirmedRoomIds.indexOf(k) !== -1,
-    )
-    if (!roomsRaw || !usersRaw) {
-      return
-    }
-    const roomIds = Object.keys(roomsRaw)
-    const userIds = Object.keys(usersRaw)
-    const counts = (await fdb.ref(`room-user-count`).once('value')).val()
-    dispatch(saveCounts(counts))
 
-    const roomUserLogs: RoomUserLogs = {}
-    for (const roomId of roomIds) {
-      roomUserLogs[roomId] = {}
-      for (const userId of userIds) {
-        const logs = (await fdb
-          .ref(`room-user-log/${roomId}/${userId}`)
-          .limitToLast(5)
-          .once('value')).val()
-        if (!logs) {
-          continue
+    dispatch(receiveRoomList(confirmedRoomIds))
+
+    const roomRef = fdb.ref(`room`)
+    const userRef = fdb.ref(`user`)
+    const userIds = []
+    await Promise.all(
+      confirmedRoomIds.map(async roomId => {
+        const roomRaw = (await roomRef.child(roomId).once('value')).val()
+        if (roomRaw.userLast) {
+          Object.keys(roomRaw.userLast).forEach(k => userIds.push(k))
         }
-        roomUserLogs[roomId][userId] = logs
-      }
-    }
+        dispatch(saveRoom(roomId, roomRaw))
+        roomRef.child(roomId).on('child_changed', snap => {
+          dispatch(saveRoom(roomId, snap.val()))
+        })
+      }),
+    )
 
-    dispatch(receiveData({ roomsRaw, usersRaw, roomUserLogs }))
+    _.uniq(userIds).forEach(async userId => {
+      const userRaw = (await userRef.child(userId).once('value')).val()
+      dispatch(receiveUser({ ...userRaw, id: userId }))
+    })
   }
 }
