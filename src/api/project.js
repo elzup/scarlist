@@ -1,4 +1,3 @@
-// @flow
 import _sensors from './sensors.json'
 
 const TIMEOUT = 100

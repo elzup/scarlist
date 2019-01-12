@@ -27,24 +27,33 @@
     "styled-components": "^4.0.3"
   },
   "devDependencies": {
+    "@types/jest": "23.3.10",
+    "@types/node": "10.12.12",
+    "@types/react": "16.7.13",
+    "@types/react-dom": "16.0.11",
+    "@types/react-redux": "^6.0.11",
+    "@types/recharts": "^1.1.6",
     "@babel/core": "^7.1.2",
+    "@types/lodash": "^4.14.119",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/addon-links": "^3.4.11",
     "@storybook/addons": "^3.4.11",
     "@storybook/react": "^3.4.11",
     "babel-loader": "^8.0.4",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-s2s-action-creater": "^0.3.1",
-    "babel-plugin-s2s-action-root": "^0.4.2",
-    "babel-plugin-s2s-action-types": "^0.4.11",
-    "babel-plugin-s2s-reducer-root": "^0.3.4",
-    "babel-plugin-s2s-state-root": "^0.2.10",
     "binary": "^0.3.0",
     "flow-bin": "^0.84.0",
-    "prettier": "^1.14.3",
     "react-dev-utils": "^6.1.1",
-    "s2s": "^0.18.3",
-    "serve": "^10.0.2"
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "serve": "^10.0.2",
+    "typescript": "3.2.2",
+    "typescript-fsa": "^3.0.0-beta-2",
+    "typescript-fsa-reducers": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,6 +64,12 @@
     "deploy": "firebase deploy --only hosting",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
