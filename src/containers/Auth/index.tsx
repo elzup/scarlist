@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 import { State, Auth } from '../../types'
-import { getAuth } from './selectors'
+import { getAuth } from '../../state/Auth/selectors'
 import { CircularProgress } from '@material-ui/core'
 
 type OProps = {

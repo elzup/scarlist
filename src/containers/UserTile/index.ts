@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { State as RootState } from '../../types'
 // import * as selectors from './selectors'
 import UserTile from '../../components/UserTile'
-import { getRoomUser } from './selectors'
+import { getRoomUser } from '../../state/UserTile/selectors'
 
 type OProps = {
   userId: string

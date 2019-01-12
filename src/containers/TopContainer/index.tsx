@@ -4,7 +4,7 @@ import * as React from 'react'
 import { State as RootState } from '../../types'
 import RoomListContainer from '../RoomListContainer'
 
-import { loadData } from './logic'
+import { loadData } from '../../state/TopContainer/logic'
 import { Page } from '../../components'
 // import * as selectors from './selectors'
 import UserForm from '../UserForm'
@@ -14,7 +14,7 @@ import { Tabs } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import SwipeableViews from 'react-swipeable-views'
 import { Button } from '@material-ui/core'
-import { logout } from '../Firebase/logic'
+import { logout } from '../../state/Firebase/logic'
 
 type Props = {
   loadData: () => void

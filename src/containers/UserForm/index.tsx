@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import UserForm from '../../components/UserForm'
 import { State as RootState } from '../../types'
-import { updateUser } from '../Firebase/logic'
-import { getUser } from '../Auth/selectors'
+import { updateUser } from '../../state/Firebase/logic'
+import { getUser } from '../../state/Auth/selectors'
 
 // import * as selectors from './selectors'
 

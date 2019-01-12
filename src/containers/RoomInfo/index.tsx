@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { State as RootState, Room, RoomDayCounts } from '../../types'
-import { getRoom } from '../RoomById/selectors'
+import { State as RootState, Room } from '../../types'
+import { getRoom } from '../../state/RoomById/selectors'
 import _ from 'lodash'
 
 import UserTile from '../UserTile'
@@ -73,7 +73,7 @@ const RoomInfo: React.SFC<Props> = ({ room, bp }) => {
   )
 }
 
-const MemberList = styled.div`
+const MemberList = styled.div<{ cn: number }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -34,12 +34,12 @@ UserTile.defaultProps = {
   timeout: false,
 }
 
-const Name = styled(Typography)`
+const Name = styled<any>(Typography)`
   text-align: center;
   margin: 5px;
 `
 
-const Timeout = styled(Typography)`
+const Timeout = styled<any>(Typography)`
   text-align: center;
   opacity: 0.3;
   margin: 5px;
@@ -48,7 +48,7 @@ const Timeout = styled(Typography)`
   }
 `
 
-const Wrapper = styled(Paper)`
+const Wrapper = styled<any>(Paper)`
   margin-top: 5px;
   width: 100%;
   padding: 10px 0;

@@ -2,8 +2,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import NavBar from '../../components/NavBar/index'
 import { State } from '../../types/index'
-import { refInit } from '../Firebase/logic'
-import { getIsLogin } from '../Auth/selectors'
+import { refInit } from '../../state/Firebase/logic'
+import { getIsLogin } from '../../state/Auth/selectors'
 
 type Props = {
   isLogin: boolean

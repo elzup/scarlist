@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import Auth from './containers/Auth/reducer'
-import RoomById from './containers/RoomById/reducer'
-import RoomDayCountById from './containers/RoomDayCountById/reducer'
-import RoomListContainer from './containers/RoomListContainer/reducer'
-import System from './containers/System/reducer'
-import UserById from './containers/UserById/reducer'
-import UserForm from './containers/UserForm/reducer'
+import Auth from './state/Auth/reducer'
+import RoomById from './state/RoomById/reducer'
+import RoomDayCountById from './state/RoomDayCountById/reducer'
+import RoomListContainer from './state/RoomListContainer/reducer'
+import System from './state/System/reducer'
+import UserById from './state/UserById/reducer'
+import UserForm from './state/UserForm/reducer'
 import { State } from './types'
 
 export default combineReducers<State>({
