@@ -4,7 +4,7 @@ import 'firebase/auth'
 import 'firebase/database'
 import _ from 'lodash'
 
-import { ThunkAction, User } from '../../types'
+import { ThunkAction, User } from '../../types/index'
 import { initializeFirebase } from '../../services/firebase'
 
 initializeFirebase()
@@ -16,7 +16,7 @@ import * as userFormActions from '../UserForm/actions'
 import { getConfirmedRooms } from '../Auth/selectors'
 import { receiveUser } from '../UserById/actions'
 import { receiveRoomList } from '../RoomListContainer/actions'
-import { saveRoom } from '../RoomById/logic'
+import { saveRoom } from '../RoomById/operations'
 
 export function login(): ThunkAction {
   return dispatch => {

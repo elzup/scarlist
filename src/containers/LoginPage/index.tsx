@@ -5,7 +5,7 @@ import { Typography, Paper } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 
 import { State, Auth } from '../../types'
-import { login } from '../../state/Firebase/logic'
+import { login } from '../../state/Firebase/operations'
 import { Page } from '../../components'
 import { getAuth } from '../../state/Auth/selectors'
 import { Redirect } from 'react-router-dom'

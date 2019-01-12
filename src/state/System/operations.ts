@@ -1,8 +1,8 @@
 import moment from 'moment'
-import { ThunkAction } from '../../types'
+import { ThunkAction } from '../../types/index'
 import * as actions from './actions'
 
-import config from '../../config'
+import config from '../../config/index'
 
 export function dataLoadingStart(): ThunkAction {
   return (dispatch, getState) => {

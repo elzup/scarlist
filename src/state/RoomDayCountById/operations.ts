@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { ThunkAction, RoomDayCounts, DayHeatMapFields } from '../../types'
+import { ThunkAction, RoomDayCounts, DayHeatMapFields } from '../../types/index'
 import * as actions from './actions'
 
 type CountRaw = {

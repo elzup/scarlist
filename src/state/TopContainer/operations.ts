@@ -1,6 +1,6 @@
-import { ThunkAction } from '../../types'
-import { requestData } from '../Firebase/logic'
-import { dataLoadingStart, dataLoadingEnd } from '../System/logic'
+import { ThunkAction } from '../../types/index'
+import { requestData } from '../Firebase/operations'
+import { dataLoadingStart, dataLoadingEnd } from '../System/operations'
 
 export function loadData(): ThunkAction {
   return async (dispatch, getState) => {

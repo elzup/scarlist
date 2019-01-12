@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import NavBar from '../../components/NavBar/index'
 import { State } from '../../types/index'
-import { refInit } from '../../state/Firebase/logic'
+import { refInit } from '../../state/Firebase/operations'
 import { getIsLogin } from '../../state/Auth/selectors'
 
 type Props = {

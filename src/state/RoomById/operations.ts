@@ -1,8 +1,8 @@
 import moment from 'moment'
 
-import { ThunkAction, RoomRaw, Room } from '../../types'
+import { ThunkAction, RoomRaw, Room } from '../../types/index'
 import * as actions from './actions'
-import config from '../../config'
+import config from '../../config/index'
 import _ from 'lodash'
 
 export const saveRoom = (id: string, room: RoomRaw): ThunkAction => {
