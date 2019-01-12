@@ -8,7 +8,7 @@ type Props = {
   timeout?: boolean
 }
 
-const UserTile = (props: Props) => {
+const UserTile: React.SFC<Props> = props => {
   const { roomUser, timeout } = props
   const { user } = roomUser
   if (!user) {
@@ -29,6 +29,9 @@ const UserTile = (props: Props) => {
       </div>
     </Wrapper>
   )
+}
+UserTile.defaultProps = {
+  timeout: false,
 }
 
 const Name = styled(Typography)`

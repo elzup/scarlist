@@ -16,12 +16,6 @@ const theme = createMuiTheme({
   palette,
   typography: {
     useNextVariants: true,
-    h4: {
-      marginTop: '8px',
-    },
-    h6: {
-      padding: '8px',
-    },
   },
   overrides: {
     MuiGrid: {
