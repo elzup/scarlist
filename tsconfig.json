@@ -1,0 +1,21 @@
+{
+  "main": "dist/index",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es7", "dom", "es2017"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "rootDirs": ["src"]
+  },
+  "include": ["src/**/*"]
+}
