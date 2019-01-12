@@ -2,16 +2,17 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { State as RootState } from '../../types'
 import * as selectors from './selectors'
-import RoomInfo from '../RoomInfo'
+import RoomInfo, { Bp } from '../RoomInfo'
 import { getLoadingData } from '../System/selectors'
 import { getConfirmedRooms, getSetuped } from '../Auth/selectors'
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress, withWidth } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
+import { toRenderProps } from 'recompose'
 
 type Props = {
   roomIds: string[]
   isLoading: boolean
-  isSetuped: boolean
+  isSetuped: boolean | null
   confirmedRooms: false | string[]
 }
 

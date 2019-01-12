@@ -2,16 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { State as RootState, Room, RoomDayCounts } from '../../types'
 import { getRoom } from '../RoomById/selectors'
-import { getRoomCountToday } from '../RoomDayCountById/selectors'
-import { withWidth } from '@material-ui/core'
 import _ from 'lodash'
 
 import UserTile from '../UserTile'
 import styled from 'styled-components'
 
-import { Typography } from '@material-ui/core'
+import { Typography, withWidth } from '@material-ui/core'
 
-type Bp = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type Bp = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 type OProps = {
   roomId: string
@@ -20,7 +18,6 @@ type OProps = {
 
 type Props = {
   room: Room
-  roomCount: RoomDayCounts
   bp: Bp
 }
 
@@ -34,7 +31,7 @@ const colNum = (bp: Bp, isSub: boolean) => {
   }[bp][isSub ? 1 : 0]
 }
 
-const RoomInfo = ({ room, roomCount, bp }: Props) => {
+const RoomInfo: React.SFC<Props> = ({ room, bp }) => {
   const currentCount = room.currentUsers.length
   const todayCount = room.todayUsers.length
   // column num
@@ -88,8 +85,7 @@ const MemberList = styled.div`
 
 const ms = (state: RootState, op: OProps) => ({
   room: getRoom(state, op.roomId),
-  roomCount: getRoomCountToday(state, op.roomId),
-  bp: op.width,
+  bp: op.width as Bp,
 })
 
 const conn = connect(

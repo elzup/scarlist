@@ -1,19 +1,11 @@
 import { RoomDayCounts } from '../../types'
 
-import { RECEIVE_COUNT, RECEIVE_COUNTS } from './actionTypes'
-import { ReceiveCount, ReceiveCounts } from './actionTypes'
+import actionCreatorFactory from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-export function receiveCount(count: RoomDayCounts): ReceiveCount {
-  return {
-    type: RECEIVE_COUNT,
-    count,
-  }
-}
-export function receiveCounts(counts: {
-  [id: string]: RoomDayCounts
-}): ReceiveCounts {
-  return {
-    type: RECEIVE_COUNTS,
-    counts,
-  }
-}
+export const receiveCount = actionCreator<RoomDayCounts>(
+  'ACTIONS_RECEIVE_COUNT',
+)
+export const receiveCounts = actionCreator<{ [id: string]: RoomDayCounts }>(
+  'ACTIONS_RECEIVE_COUNTS',
+)

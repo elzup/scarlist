@@ -1,4 +1,4 @@
-const moment = require('moment')
+import moment from 'moment'
 
 const timeLabel = (timestamp: number) => {
   const m = moment(timestamp)

@@ -1,21 +1,8 @@
 import { User } from '../../types/'
 
-import { LOGIN, LOGOUT, LOGIN_FAILED } from './actionTypes'
-import { Login, Logout, LoginFailed } from './actionTypes'
+import actionCreatorFactory from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-export function login(user: User): Login {
-  return {
-    type: LOGIN,
-    user,
-  }
-}
-export function logout(): Logout {
-  return {
-    type: LOGOUT,
-  }
-}
-export function loginFailed(): LoginFailed {
-  return {
-    type: LOGIN_FAILED,
-  }
-}
+export const login = actionCreator<User>('ACTIONS_LOGIN')
+export const logout = actionCreator('ACTIONS_LOGOUT')
+export const loginFailed = actionCreator('ACTIONS_LOGIN_FAILED')

@@ -4,7 +4,7 @@ import { State as RootState } from '../../types'
 import Typography from '@material-ui/core/Typography'
 
 // import * as selectors from './selectors'
-import { getTimestampStr } from '../System/selectors'
+import { getTimestampStr } from './selectors'
 
 type Props = {
   timestampStr: string

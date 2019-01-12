@@ -1,34 +1,30 @@
-import { Action, Auth } from '../../types'
-import { Actions } from './actionTypes'
+import { reducerWithInitialState } from 'typescript-fsa-reducers'
+import { Auth } from '../../types'
+import * as actions from './actions'
 
 export type State = Auth
 
-export const initialState: State = {
+export const initialState = {
   loading: true,
-}
+} as State
 
-export default function(state: State = initialState, action: Action): State {
-  switch (action.type) {
-    case Actions.LOGIN:
-      return {
-        loading: false,
-        user: action.user,
-        authorized: true,
-      }
-
-    case Actions.LOGIN_FAILED:
-      return {
-        loading: false,
-        authorized: false,
-      }
-
-    case Actions.LOGOUT:
-      return {
-        loading: false,
-        authorized: false,
-      }
-
-    default:
-      return state
-  }
-}
+export default reducerWithInitialState(initialState)
+  .case(actions.login, (state, user) => {
+    return {
+      loading: false,
+      user,
+      authorized: true,
+    }
+  })
+  .case(actions.logout, state => {
+    return {
+      loading: false,
+      authorized: false,
+    }
+  })
+  .case(actions.loginFailed, state => {
+    return {
+      loading: false,
+      authorized: false,
+    }
+  })

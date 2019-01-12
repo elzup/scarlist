@@ -5,7 +5,11 @@ import 'firebase/database'
 import _ from 'lodash'
 
 import { ThunkAction, User } from '../../types'
-import { firebaseDb as fdb } from '../../services/firebase'
+import { initializeFirebase } from '../../services/firebase'
+
+initializeFirebase()
+const fdb = firebase.database()
+
 // import * as actions from './actions'
 import * as authActions from '../Auth/actions'
 import * as userFormActions from '../UserForm/actions'
@@ -101,7 +105,7 @@ export function requestData(): ThunkAction {
 
     const roomRef = fdb.ref(`room`)
     const userRef = fdb.ref(`user`)
-    const userIds = []
+    const userIds = [] as string[]
     await Promise.all(
       confirmedRoomIds.map(async roomId => {
         const roomRaw = (await roomRef.child(roomId).once('value')).val()
@@ -109,7 +113,7 @@ export function requestData(): ThunkAction {
           Object.keys(roomRaw.userLast).forEach(k => userIds.push(k))
         }
         dispatch(saveRoom(roomId, roomRaw))
-        roomRef.child(roomId).on('child_changed', snap => {
+        roomRef.child(roomId).on('child_changed', (snap: any) => {
           dispatch(saveRoom(roomId, snap.val()))
         })
       }),

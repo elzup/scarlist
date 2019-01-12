@@ -24,8 +24,8 @@ function toRoom(id: string, room: RoomRaw): Room {
       .subtract(config.currentUserLimit, 'seconds')
       .unix() * 1000
 
-  const currentUsers = []
-  const todayUsers = []
+  const currentUsers = [] as Array<{ id: string; timestamp: number }>
+  const todayUsers = [] as Array<{ id: string; timestamp: number }>
 
   _.each(room.userLast, (timestamp, id) => {
     if (timestamp >= currentStart) {

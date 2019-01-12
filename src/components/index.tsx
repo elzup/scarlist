@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
-import styled from 'styled-components'
 import { Grid } from '@material-ui/core'
 
 export const Button = styled.button`

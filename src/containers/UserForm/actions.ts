@@ -1,11 +1,5 @@
 import { State } from './reducer'
+import { actionCreatorFactory } from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-import { UPDATE_STATE } from './actionTypes'
-import { UpdateState } from './actionTypes'
-
-export function updateState(state: State): UpdateState {
-  return {
-    type: UPDATE_STATE,
-    state,
-  }
-}
+export const updateState = actionCreator<State>('ACTIONS_UPDATE_STATE')

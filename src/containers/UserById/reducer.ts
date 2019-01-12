@@ -1,18 +1,17 @@
-import { Action, User } from '../../types'
-import { Actions } from './actionTypes'
+import { reducerWithInitialState } from 'typescript-fsa-reducers'
+import { User } from '../../types'
+import * as actions from './actions'
 
 export type State = { [id: string]: User }
 
 const initialState: State = {}
 
-export default function(state: State = initialState, action: Action): State {
-  switch (action.type) {
-    case Actions.RECEIVE_USER:
-      return {
-        ...state,
-        [action.user.id]: action.user,
-      }
-    default:
-      return state
-  }
-}
+export default reducerWithInitialState(initialState).case(
+  actions.receiveUser,
+  (state, user) => {
+    return {
+      ...state,
+      [user.id]: user,
+    }
+  },
+)

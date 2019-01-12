@@ -11,7 +11,7 @@ import { getAuth } from '../Auth/selectors'
 import { Redirect } from 'react-router-dom'
 
 type Props = {
-  login: typeof login
+  login: () => void
   auth: Auth
 }
 

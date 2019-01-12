@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { ThunkAction, RoomDayCounts } from '../../types'
+import { ThunkAction, RoomDayCounts, DayHeatMapFields } from '../../types'
 import * as actions from './actions'
 
 type CountRaw = {
@@ -13,7 +13,7 @@ type CountRaw = {
   }
 }
 
-const countToColor = count => {
+const countToColor = (count: number) => {
   // 0 =>
   // 1-19 =>
   // 20-49 =>
@@ -35,7 +35,7 @@ export function saveCounts(counts: CountRaw): ThunkAction {
                 users: [],
               }
             }
-            const userDay = { userId }
+            const userDay = { userId } as any
             _.range(0, 24).forEach(hour => {
               const count = hours[String(hour).padStart(2, '0')]
               const hs = `${hour}`.padStart(2, '0')

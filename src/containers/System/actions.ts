@@ -1,11 +1,5 @@
+import { actionCreatorFactory } from 'typescript-fsa'
 import { System } from '../../types'
+const actionCreator = actionCreatorFactory()
 
-import { UPDATE_SYSTEM } from './actionTypes'
-import { UpdateSystem } from './actionTypes'
-
-export function updateSystem(system: System): UpdateSystem {
-  return {
-    type: UPDATE_SYSTEM,
-    system,
-  }
-}
+export const updateSystem = actionCreator<System>('ACTIONS_UPDATE_SYSTEM')

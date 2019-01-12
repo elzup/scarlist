@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from './reducer'
-import { Store } from './types'
 
 export default () => {
   const middleware = [thunk]
 
   const devtool =
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 
   const composer = devtool
     ? compose(
@@ -16,6 +16,6 @@ export default () => {
       )
     : compose(applyMiddleware(...middleware))
 
-  const store: Store = createStore(reducer, composer)
+  const store = createStore(reducer, composer)
   return store
 }

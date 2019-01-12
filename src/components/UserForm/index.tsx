@@ -5,14 +5,14 @@ import { ImgWrapper, Photo } from '../UserTile'
 import { Typography } from '@material-ui/core'
 
 type Props = {
-  user: ?User,
-  updateUser: Function,
-  loading: boolean,
+  user: User | null
+  updateUser: Function
+  loading: boolean
 }
 
 class UserForm extends React.Component<Props> {
-  nameRef: ?HTMLInputElement
-  macRef: ?HTMLInputElement
+  nameRef!: HTMLInputElement
+  macRef!: HTMLInputElement
 
   onClickButton = () => {
     if (!this.nameRef || !this.macRef) {

@@ -1,11 +1,5 @@
 import { User } from '../../types'
+import { actionCreatorFactory } from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-import { RECEIVE_USER } from './actionTypes'
-import { ReceiveUser } from './actionTypes'
-
-export function receiveUser(user: User): ReceiveUser {
-  return {
-    type: RECEIVE_USER,
-    user,
-  }
-}
+export const receiveUser = actionCreator<User>('ACTIONS_RECEIVE_USER')

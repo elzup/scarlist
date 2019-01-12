@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import NavBar from '../../components/NavBar'
-import { State } from '../../types'
+import NavBar from '../../components/NavBar/index'
+import { State } from '../../types/index'
 import { refInit } from '../Firebase/logic'
 import { getIsLogin } from '../Auth/selectors'
 
 type Props = {
   isLogin: boolean
-  refInit: typeof refInit
+  refInit: () => void
 }
 
 type OProps = {}

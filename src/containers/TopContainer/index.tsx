@@ -17,9 +17,9 @@ import { Button } from '@material-ui/core'
 import { logout } from '../Firebase/logic'
 
 type Props = {
-  loadData: typeof loadData
+  loadData: () => void
   roomIds: string[]
-  logout: typeof logout
+  logout: () => void
 }
 
 type State = {

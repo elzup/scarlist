@@ -1,9 +1,6 @@
-import { RECEIVE_ROOM_LIST } from './actionTypes'
-import { ReceiveRoomList } from './actionTypes'
+import actionCreatorFactory from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-export function receiveRoomList(roomIds: string[]): ReceiveRoomList {
-  return {
-    type: RECEIVE_ROOM_LIST,
-    roomIds,
-  }
-}
+export const receiveRoomList = actionCreator<string[]>(
+  'ACTIONS_RECEIVE_ROOM_LIST',
+)

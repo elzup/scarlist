@@ -1,20 +1,15 @@
-import { Action } from '../../types'
-import { Actions } from './actionTypes'
+import { reducerWithInitialState } from 'typescript-fsa-reducers'
+import * as actions from './actions'
+import { RoomDayCounts } from '../../types/'
 
-export type State = {}
+export type State = { [id: string]: RoomDayCounts }
 
-export const initialState: State = {}
+export const initialState = {} as State
 
-export default function(state: State = initialState, action: Action): State {
-  switch (action.type) {
-    case Actions.RECEIVE_COUNT:
-      return { ...state, [action.count.id]: action.count }
-    case Actions.RECEIVE_COUNTS:
-      return {
-        ...state,
-        ...action.counts,
-      }
-    default:
-      return state
-  }
-}
+export default reducerWithInitialState(initialState)
+  .case(actions.receiveCount, (state, count) => {
+    return { ...state, [count.id]: count }
+  })
+  .case(actions.receiveCounts, (state, counts) => {
+    return { ...state, ...counts }
+  })

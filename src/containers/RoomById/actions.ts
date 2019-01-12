@@ -1,11 +1,6 @@
 import { Room } from '../../types'
 
-import { RECEIVE_ROOM } from './actionTypes'
-import { ReceiveRoom } from './actionTypes'
+import actionCreatorFactory from 'typescript-fsa'
+const actionCreator = actionCreatorFactory()
 
-export function receiveRoom(room: Room): ReceiveRoom {
-  return {
-    type: RECEIVE_ROOM,
-    room,
-  }
-}
+export const receiveRoom = actionCreator<Room>('ACTIONS_RECEIVE_ROOM')
