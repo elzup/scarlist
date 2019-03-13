@@ -67,7 +67,7 @@
     "test": "react-scripts test --env=jsdom",
     "now-start": "serve build/",
     "s2s": "s2s",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "yarn build && firebase deploy --only hosting",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
