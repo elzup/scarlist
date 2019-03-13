@@ -13,7 +13,8 @@
       {
         "source": "/mac_addrs",
         "function": "mac_addrs"
-      }
+      },
+      { "source": "**", "destination": "/index.html" }
     ]
   }
 }

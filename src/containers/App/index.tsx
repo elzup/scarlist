@@ -1,14 +1,17 @@
 import React from 'react'
 import TopContainer from '../TopContainer'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import LoginPage from '../LoginPage'
 import Auth from '../Auth'
 import NavBar from '../NavBarContainer'
+import createHistory from 'history/createBrowserHistory'
+
+export const history = createHistory()
 
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <NavBar />
           <Switch>

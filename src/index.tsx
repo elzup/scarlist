@@ -31,4 +31,4 @@ if (root) {
   )
 }
 
-serviceWorker.unregister()
+serviceWorker.register()
