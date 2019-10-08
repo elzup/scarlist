@@ -52,7 +52,7 @@
     "husky": "3.0.8",
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
-    "react-dev-utils": "6.1.1",
+    "react-dev-utils": "9.1.0",
     "serve": "10.1.2",
     "tslint": "5.20.0",
     "tslint-config-prettier": "1.18.0",
