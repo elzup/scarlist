@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { Typography, Paper } from '@material-ui/core'
-import { Button } from '@material-ui/core'
+import { Typography, Paper , Button } from '@material-ui/core'
 
+
+import { Redirect } from 'react-router-dom'
 import { State, Auth } from '../../types'
 import { login } from '../../state/Firebase/operations'
 import { Page } from '../../components'
 import { getAuth } from '../../state/Auth/selectors'
-import { Redirect } from 'react-router-dom'
 
 type Props = {
   login: () => void

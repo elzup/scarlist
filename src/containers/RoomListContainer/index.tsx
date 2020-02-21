@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { CircularProgress, withWidth , Typography } from '@material-ui/core'
+import { toRenderProps } from 'recompose'
 import { State as RootState } from '../../types'
 import * as selectors from '../../state/RoomListContainer/selectors'
 import RoomInfo, { Bp } from '../RoomInfo'
 import { getLoadingData } from '../../state/System/selectors'
 import { getConfirmedRooms, getSetuped } from '../../state/Auth/selectors'
-import { CircularProgress, withWidth } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
-import { toRenderProps } from 'recompose'
+
 
 type Props = {
   roomIds: string[]
@@ -19,6 +19,7 @@ type Props = {
 class RoomListContainer extends React.Component<Props> {
   render() {
     const { props } = this
+
     if (props.isLoading) {
       return (
         <div style={{ margin: '1em' }}>

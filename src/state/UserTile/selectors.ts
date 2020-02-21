@@ -9,6 +9,7 @@ export const getRoomUser = (
 ) => {
   const user = getUser(state, userId)
   const m = moment(timestamp)
+
   return {
     lastLogLabel: m.format(),
     lastLogFromNowLabel: m.fromNow(),

@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+import styled from 'styled-components'
+import { Typography, withWidth } from '@material-ui/core'
 import { State as RootState, Room } from '../../types'
 import { getRoom } from '../../state/RoomById/selectors'
-import _ from 'lodash'
 
 import UserTile from '../UserTile'
-import styled from 'styled-components'
 
-import { Typography, withWidth } from '@material-ui/core'
 
 export type Bp = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 

@@ -1,6 +1,6 @@
+import actionCreatorFactory from 'typescript-fsa'
 import { RoomDayCounts } from '../../types'
 
-import actionCreatorFactory from 'typescript-fsa'
 const actionCreator = actionCreatorFactory()
 
 export const receiveCount = actionCreator<RoomDayCounts>(

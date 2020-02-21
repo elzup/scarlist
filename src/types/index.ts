@@ -1,6 +1,6 @@
-import { State as _State } from './state'
 import { ThunkAction as _ThunkAction } from 'redux-thunk'
 import { AnyAction } from 'typescript-fsa'
+import { State as _State } from './state'
 
 export type State = _State
 
@@ -66,8 +66,8 @@ export type RoomUser = {
 export type Room = {
   id: string
   label: string
-  currentUsers: Array<{ id: string; timestamp: number }>
-  todayUsers: Array<{ id: string; timestamp: number }>
+  currentUsers: { id: string; timestamp: number }[]
+  todayUsers: { id: string; timestamp: number }[]
 }
 
 export type RoomRaw = {

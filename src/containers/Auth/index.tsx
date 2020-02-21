@@ -2,16 +2,16 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
+import { CircularProgress } from '@material-ui/core'
 import { State, Auth } from '../../types'
 import { getAuth } from '../../state/Auth/selectors'
-import { CircularProgress } from '@material-ui/core'
 
 type OProps = {
   redirectPath: string
 }
 
 type Props = {
-  children: any
+  children: unknown
   auth: Auth
   redirectPath: string
 }

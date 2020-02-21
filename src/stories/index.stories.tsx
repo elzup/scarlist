@@ -4,10 +4,10 @@ import _ from 'lodash'
 import { storiesOf, addDecorator } from '@storybook/react'
 // import { action } from '@storybook/addon-actions'
 // import { linkTo } from '@storybook/addon-links'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import UserTile from '../components/UserTile/'
 import { RoomUser, Room, User } from '../types/'
 import { GlobalStyle } from '../components/index'
-import CssBaseline from '@material-ui/core/CssBaseline'
 
 const user0: User = {
   id: '',
@@ -49,9 +49,15 @@ const roomUser2: RoomUser = {
 const keys24 = _.range(24).map(v => _.padStart(`${v}`, 2, '0'))
 
 const rollDice = () =>
-  _.zipObject(keys24, _.range(24).map(v => _.random(0, 60, false)))
+  _.zipObject(
+    keys24,
+    _.range(24).map(v => _.random(0, 60, false)),
+  )
 const rollDiceSmall = () =>
-  _.zipObject(keys24, _.range(24).map(v => _.random(0, 1, false)))
+  _.zipObject(
+    keys24,
+    _.range(24).map(v => _.random(0, 1, false)),
+  )
 
 const countData = [
   {

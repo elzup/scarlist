@@ -1,10 +1,10 @@
 import React from 'react'
-import TopContainer from '../TopContainer'
 import { Router, Route, Switch } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory'
+import TopContainer from '../TopContainer'
 import LoginPage from '../LoginPage'
 import Auth from '../Auth'
 import NavBar from '../NavBarContainer'
-import createHistory from 'history/createBrowserHistory'
 
 export const history = createHistory()
 

@@ -20,7 +20,7 @@ export const CardContainer = styled.div`
 
 export const Background = styled.div``
 
-export const Page = (props: Object) => (
+export const Page = (props: object) => (
   <Background>
     <Grid container justify={'center'}>
       <Grid

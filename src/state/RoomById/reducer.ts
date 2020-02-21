@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
-import * as actions from './actions'
 import { Room } from '../../types'
+import * as actions from './actions'
 
 export type State = { [id: string]: Room }
 

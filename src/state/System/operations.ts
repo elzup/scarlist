@@ -1,8 +1,8 @@
 import moment from 'moment'
 import { ThunkAction } from '../../types/index'
+import config from '../../config/index'
 import * as actions from './actions'
 
-import config from '../../config/index'
 
 export function dataLoadingStart(): ThunkAction {
   return (dispatch, getState) => {
@@ -40,6 +40,7 @@ export function updateTimer(topicId: string): ThunkAction {
     const m = moment(timestamp)
     const timestampStr = m.format('YYYY-MM-DD HH:mm:ss')
     const state = getState()
+
     dispatch(
       actions.updateSystem({
         ...state.System,

@@ -24,21 +24,25 @@ const countToColor = (count: number) => {
 export function saveCounts(counts: CountRaw): ThunkAction {
   return async (dispatch, getState) => {
     const roomDayCounts: { [id: string]: RoomDayCounts } = {}
+
     _.each(counts, (room, roomId) => {
       _.each(room, (user, userId) => {
         _.each(user.hour, (days, ym) => {
           _.each(days, (hours, d) => {
             const roomDayId = `${roomId}-${ym}-${d}`
+
             if (!roomDayCounts[roomDayId]) {
               roomDayCounts[roomDayId] = {
                 id: roomDayId,
                 users: [],
               }
             }
-            const userDay = { userId } as any
+            const userDay = { userId } as unknown
+
             _.range(0, 24).forEach(hour => {
               const count = hours[String(hour).padStart(2, '0')]
               const hs = `${hour}`.padStart(2, '0')
+
               userDay[hs] = count || 0
               userDay[`${hs}Color`] = countToColor(count)
             })

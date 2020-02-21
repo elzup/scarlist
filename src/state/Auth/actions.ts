@@ -1,6 +1,6 @@
+import actionCreatorFactory from 'typescript-fsa'
 import { User } from '../../types/'
 
-import actionCreatorFactory from 'typescript-fsa'
 const actionCreator = actionCreatorFactory()
 
 export const login = actionCreator<User>('ACTIONS_LOGIN')

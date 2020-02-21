@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import * as React from 'react'
 
+import { Tab , Tabs , Paper , Button } from '@material-ui/core'
+import SwipeableViews from 'react-swipeable-views'
 import { State as RootState } from '../../types'
 import RoomListContainer from '../RoomListContainer'
 
@@ -9,11 +11,9 @@ import { Page } from '../../components'
 // import * as selectors from './selectors'
 import UserForm from '../UserForm'
 import MacAddrDescription from '../../components/MacAddrDescription'
-import { Tab } from '@material-ui/core'
-import { Tabs } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
-import SwipeableViews from 'react-swipeable-views'
-import { Button } from '@material-ui/core'
+
+
+
 import { logout } from '../../state/Firebase/operations'
 
 type Props = {
@@ -34,6 +34,7 @@ class TopContainer extends React.Component<Props, State> {
 
   render() {
     const { props } = this
+
     return (
       <div>
         <Page>

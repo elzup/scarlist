@@ -1,0 +1,7 @@
+{
+  "extends": ["nzap", "nzap/react", "nzap/typescript"],
+  "rules": {
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-handler-names": 0
+  }
+}

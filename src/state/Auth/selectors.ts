@@ -1,5 +1,5 @@
-import { State, User } from '../../types'
 import _ from 'lodash'
+import { State, User } from '../../types'
 
 export const getAuth = (state: State) => state.Auth
 export const getLoading = (state: State) => state.Auth.loading
@@ -14,11 +14,13 @@ export const getIsLogin = (state: State) =>
 
 export const getSetuped = (state: State) => {
   const user = getUser(state)
+
   return user && !!user.macAddrs
 }
 
 export const getConfirmedRooms = (state: State): false | string[] => {
   const user = getUser(state)
+
   if (!user || !user.loggedRooms || _.keys(user.loggedRooms).length === 0) {
     return false
   }

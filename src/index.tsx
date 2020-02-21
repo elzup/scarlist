@@ -16,6 +16,7 @@ import { GlobalStyle } from './components'
 const store = configureStore()
 
 const root = document.getElementById('root')
+
 if (root) {
   ReactDOM.render(
     <Provider store={store}>

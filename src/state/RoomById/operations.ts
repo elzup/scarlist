@@ -1,9 +1,9 @@
 import moment from 'moment'
 
-import { ThunkAction, RoomRaw, Room } from '../../types/index'
-import * as actions from './actions'
-import config from '../../config/index'
 import _ from 'lodash'
+import { ThunkAction, RoomRaw, Room } from '../../types/index'
+import config from '../../config/index'
+import * as actions from './actions'
 
 export const saveRoom = (id: string, room: RoomRaw): ThunkAction => {
   return async (dispatch, getState) => {
@@ -24,8 +24,8 @@ function toRoom(id: string, room: RoomRaw): Room {
       .subtract(config.currentUserLimit, 'seconds')
       .unix() * 1000
 
-  const currentUsers = [] as Array<{ id: string; timestamp: number }>
-  const todayUsers = [] as Array<{ id: string; timestamp: number }>
+  const currentUsers = [] as { id: string; timestamp: number }[]
+  const todayUsers = [] as { id: string; timestamp: number }[]
 
   _.each(room.userLast, (timestamp, id) => {
     if (timestamp >= currentStart) {

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { RoomUser } from '../../types'
 import styled from 'styled-components'
 import { Typography, Paper } from '@material-ui/core'
+import { RoomUser } from '../../types'
 
 type Props = {
   roomUser: RoomUser
@@ -11,6 +11,7 @@ type Props = {
 const UserTile: React.SFC<Props> = props => {
   const { roomUser, timeout } = props
   const { user } = roomUser
+
   if (!user) {
     return <p>...</p>
   }
@@ -30,16 +31,17 @@ const UserTile: React.SFC<Props> = props => {
     </Wrapper>
   )
 }
+
 UserTile.defaultProps = {
   timeout: false,
 }
 
-const Name = styled<any>(Typography)`
+const Name = styled<unknown>(Typography)`
   text-align: center;
   margin: 5px;
 `
 
-const Timeout = styled<any>(Typography)`
+const Timeout = styled<unknown>(Typography)`
   text-align: center;
   opacity: 0.3;
   margin: 5px;
@@ -48,7 +50,7 @@ const Timeout = styled<any>(Typography)`
   }
 `
 
-const Wrapper = styled<any>(Paper)`
+const Wrapper = styled<unknown>(Paper)`
   margin-top: 5px;
   width: 100%;
   padding: 10px 0;

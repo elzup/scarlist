@@ -1,14 +1,11 @@
 import firebase from 'firebase/app'
-import 'firebase/app'
+
 import 'firebase/auth'
 import 'firebase/database'
 import _ from 'lodash'
 
 import { ThunkAction, User } from '../../types/index'
 import { initializeFirebase } from '../../services/firebase'
-
-initializeFirebase()
-const fdb = firebase.database()
 
 // import * as actions from './actions'
 import * as authActions from '../Auth/actions'
@@ -18,15 +15,20 @@ import { receiveUser } from '../UserById/actions'
 import { receiveRoomList } from '../RoomListContainer/actions'
 import { saveRoom } from '../RoomById/operations'
 
+initializeFirebase()
+const fdb = firebase.database()
+
 export function login(): ThunkAction {
   return dispatch => {
     const provider = new firebase.auth.GoogleAuthProvider()
+
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(async res => {
         const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
+
         userRef.set(user)
         dispatch(authActions.login(user))
       })
@@ -56,7 +58,7 @@ export function updateUser(user: User): ThunkAction {
   }
 }
 
-async function omitUser(user: any): Promise<User> {
+async function omitUser(user: unknown): Promise<User> {
   const userOldSnap = await fdb.ref(`user/${user.uid}`).once('value')
   const userOld = userOldSnap.exists() ? userOldSnap.val() : user
 
@@ -67,6 +69,7 @@ async function omitUser(user: any): Promise<User> {
   const name = userOld.name || user.name || displayName
   const photoURL = user.photoURL || userOld.photoURL || ''
   const loggedRooms = userOld.loggedRooms || {}
+
   return {
     id: user.uid,
     displayName,
@@ -82,6 +85,7 @@ export function refInit(): ThunkAction {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         const userFull = (await fdb.ref(`user/${user.uid}`).once('value')).val()
+
         if (userFull) {
           dispatch(authActions.login(userFull))
         } else {
@@ -97,6 +101,7 @@ export function refInit(): ThunkAction {
 export function requestData(): ThunkAction {
   return async (dispatch, getState) => {
     const confirmedRoomIds = getConfirmedRooms(getState())
+
     if (!confirmedRoomIds) {
       return
     }
@@ -106,14 +111,16 @@ export function requestData(): ThunkAction {
     const roomRef = fdb.ref(`room`)
     const userRef = fdb.ref(`user`)
     const userIds = [] as string[]
+
     await Promise.all(
       confirmedRoomIds.map(async roomId => {
         const roomRaw = (await roomRef.child(roomId).once('value')).val()
+
         if (roomRaw.userLast) {
           Object.keys(roomRaw.userLast).forEach(k => userIds.push(k))
         }
         dispatch(saveRoom(roomId, roomRaw))
-        roomRef.child(roomId).on('child_changed', (snap: any) => {
+        roomRef.child(roomId).on('child_changed', (snap: unknown) => {
           dispatch(saveRoom(roomId, snap.val()))
         })
       }),
@@ -121,6 +128,7 @@ export function requestData(): ThunkAction {
 
     _.uniq(userIds).forEach(async userId => {
       const userRaw = (await userRef.child(userId).once('value')).val()
+
       dispatch(receiveUser({ ...userRaw, id: userId }))
     })
   }

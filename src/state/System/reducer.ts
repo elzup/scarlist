@@ -1,6 +1,6 @@
-import { System } from '../../types'
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
-import { User } from '../../types'
+import { System , User } from '../../types'
+
 import * as actions from './actions'
 
 export type State = System
