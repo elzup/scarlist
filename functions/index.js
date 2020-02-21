@@ -10,6 +10,7 @@ const makeHash = s => {
 }
 
 admin.initializeApp()
+const fdb = admin.database()
 
 const getTimes = () => {
   const date = Date.now()
@@ -91,32 +92,56 @@ exports.count = functions.https.onRequest(async (req, res) => {
 async function insertLogsByMac(roomId, macAddrs) {
   const { ym, d, h, timestamp } = getTimes()
 
-  const macaUserSnap = await admin
-    .database()
-    .ref(`/macaddr-user`)
-    .once('value')
+  const macaUserSnap = await fdb.ref(`/macaddr-user`).once('value')
   const macaToUser = macaUserSnap.val()
   const userIds = uniq(macAddrs.map(v => macaToUser[v]).filter(v => !!v))
 
+  const userLasts = (
+    await fdb.ref(`/room/${roomId}/userLast`).once('value')
+  ).val()
+  const updates = []
+
+  const settingsSnap = await fdb.ref(`/user-setting`).once('value')
+  if (!settingsSnap.exists()) {
+    await settingsSnap.set({})
+  }
+  const settings = settingsSnap.val()
+
+  // room userLasts があり、かつ、settingsがあるユーザ
+  const noticeSettings = Object.keys(userLasts)
+    .map(userId => settings[userId])
+    .filter(v => !!v)
+
   userIds.forEach(userId => {
     registerLog(roomId, userId, ym, d, h, timestamp)
+
+    const v = userLasts[userId]
+    const diffMs = timestamp - new Date(v)
+    const diffHour = diffMs / 1000 / 60 / 60
+    if (diffHour >= 1) {
+      // 1時間ぶりのログ
+      const userSettingRef = fdb.ref(`/user-setting/${userId}`)
+      const value = userSettingRef.once('value')
+      if (!value.exists()) return
+
+      updates()
+    }
   })
-  const currentRoomRef = admin.database().ref(`/current-room/${roomId}`)
+  const currentRoomRef = fdb.ref(`/current-room/${roomId}`)
+
   currentRoomRef.update({})
 }
 
 function registerLog(roomId, userId, ym, d, h, timestamp) {
-  const roomUserRef = admin.database().ref(`/room-user-log/${roomId}/${userId}`)
-  const roomCurrentRef = admin
-    .database()
-    .ref(`/room/${roomId}/userLast/${userId}`)
-  const countRef = admin.database().ref(`/room-user-count/${roomId}/${userId}`)
+  const roomUserRef = fdb.ref(`/room-user-log/${roomId}/${userId}`)
+  const roomCurrentRef = fdb.ref(`/room/${roomId}/userLast/${userId}`)
+  const countRef = fdb.ref(`/room-user-count/${roomId}/${userId}`)
+
   roomCurrentRef.set(timestamp)
   countRef.child(`month/${ym}`).transaction(v => safeAdd(v, 1))
   countRef.child(`day/${ym}/${d}`).transaction(v => safeAdd(v, 1))
   countRef.child(`hour/${ym}/${d}/${h}`).transaction(v => safeAdd(v, 1))
-  admin
-    .database()
+  fdb
     .ref(`/user/${userId}/loggedRooms`)
     .child(roomId)
     .set(true)
@@ -131,12 +156,9 @@ const userOmit = user => ({
 })
 
 async function getLogs(roomId) {
-  const usersSnap = await admin
-    .database()
-    .ref(`/user`)
-    .once('value')
+  const usersSnap = await fdb.ref(`/user`).once('value')
   const users = usersSnap.val()
-  const roomRef = admin.database().ref(`/room-user-log/${roomId}`)
+  const roomRef = fdb.ref(`/room-user-log/${roomId}`)
   return await Promise.all(
     Object.keys(users).map(async userId => {
       const logsSnap = await roomRef
@@ -149,17 +171,11 @@ async function getLogs(roomId) {
 }
 
 async function getCounts(roomId) {
-  const countsSnap = await admin
-    .database()
-    .ref(`/room-user-count/${roomId}`)
-    .once('value')
+  const countsSnap = await fdb.ref(`/room-user-count/${roomId}`).once('value')
   return countsSnap.val()
 }
 
 async function getMacAddrs() {
-  const macAddrSnap = await admin
-    .database()
-    .ref(`/macaddr-user`)
-    .once('value')
+  const macAddrSnap = await fdb.ref(`/macaddr-user`).once('value')
   return macAddrSnap.val()
 }

@@ -1,13 +1,15 @@
 {
   "rules": {
-    ".read": "auth != null",
+    ".read": "false",
     ".write": "false",
     "rooms": {
+      ".read": "auth != null",
       "$roomId": {
         ".validate": "(newData.isBoolean())"
       }
     },
     "room": {
+      ".read": "auth != null",
       "$roomId": {
         ".validate": "newData.hasChildren(['label'])",
         "label": {
@@ -21,6 +23,7 @@
       }
     },
     "user": {
+      ".read": "auth != null",
       "$userId": {
         ".write": "$userId === auth.uid",
         "id": { ".validate": "(newData.isString())" },
@@ -29,13 +32,22 @@
         "photoURL": { ".validate": "(newData.isString())" }
       }
     },
+    "user-setting": {
+      "$userId": {
+        ".read": "$userId === auth.uid",
+        ".write": "$userId === auth.uid",
+        "webhook": { ".validate": "(newData.isString())" }
+      }
+    },
     "macaddr-user": {
+      ".read": "auth != null",
       "$macAddr": {
         ".write": "newData.val() === auth.uid",
         ".validate": "(newData.isString())"
       }
     },
     "room-user-log": {
+      ".read": "auth != null",
       "$roomId": {
         "$userId": {
           "$logId": {
@@ -45,6 +57,7 @@
       }
     },
     "room-user-count": {
+      ".read": "auth != null",
       "$roomId": {
         "$userId": {
           "month": {
