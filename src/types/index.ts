@@ -47,7 +47,7 @@ export type UserHourCounts = {
 }
 
 export type DayHeatMapFields = {
-  userId: string
+  [key: string]: number | string
   /* 1: number, 1Color: string for nivo format*/
 }
 

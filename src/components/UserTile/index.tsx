@@ -16,7 +16,7 @@ const UserTile: React.SFC<Props> = props => {
     return <p>...</p>
   }
   return (
-    <Wrapper data-timeout={timeout}>
+    <Wrapper style={timeout ? { border: 'solid 4px gray' } : {}}>
       <ImgWrapper>
         <Photo
           data-timeout={timeout}
@@ -36,12 +36,12 @@ UserTile.defaultProps = {
   timeout: false,
 }
 
-const Name = styled<unknown>(Typography)`
+const Name = styled(Typography)`
   text-align: center;
   margin: 5px;
 `
 
-const Timeout = styled<unknown>(Typography)`
+const Timeout = styled(Typography)`
   text-align: center;
   opacity: 0.3;
   margin: 5px;
@@ -50,7 +50,7 @@ const Timeout = styled<unknown>(Typography)`
   }
 `
 
-const Wrapper = styled<unknown>(Paper)`
+const Wrapper = styled(Paper)`
   margin-top: 5px;
   width: 100%;
   padding: 10px 0;

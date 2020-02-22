@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
-import { System , User } from '../../types'
+import { System } from '../../types'
 
 import * as actions from './actions'
 

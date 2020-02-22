@@ -1,13 +1,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { CircularProgress, withWidth , Typography } from '@material-ui/core'
-import { toRenderProps } from 'recompose'
+import { CircularProgress, Typography } from '@material-ui/core'
 import { State as RootState } from '../../types'
 import * as selectors from '../../state/RoomListContainer/selectors'
-import RoomInfo, { Bp } from '../RoomInfo'
+import RoomInfo from '../RoomInfo'
 import { getLoadingData } from '../../state/System/selectors'
 import { getConfirmedRooms, getSetuped } from '../../state/Auth/selectors'
-
 
 type Props = {
   roomIds: string[]
@@ -30,7 +28,7 @@ class RoomListContainer extends React.Component<Props> {
     if (!props.confirmedRooms) {
       return (
         <>
-          <Typography color={props.isSetuped ? 'default' : 'secondary'}>
+          <Typography color={props.isSetuped ? 'initial' : 'secondary'}>
             1. 右上の設定ボタンからMACアドレスの設定を行ってください。
           </Typography>
           <Typography color="secondary">
@@ -59,9 +57,6 @@ const ms = (state: RootState) => ({
   isLoading: getLoadingData(state),
 })
 
-const conn = connect(
-  ms,
-  {},
-)
+const conn = connect(ms, {})
 
 export default conn(RoomListContainer)

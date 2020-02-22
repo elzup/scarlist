@@ -7,16 +7,9 @@ export const palette = {
   secondary: red,
 }
 
-const baseTheme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-})
+const baseTheme = createMuiTheme()
 const theme = createMuiTheme({
   palette,
-  typography: {
-    useNextVariants: true,
-  },
   overrides: {
     MuiGrid: {
       container: {

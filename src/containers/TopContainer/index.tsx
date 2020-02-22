@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Tab , Tabs , Paper , Button } from '@material-ui/core'
+import { Tab, Tabs, Paper, Button } from '@material-ui/core'
 import SwipeableViews from 'react-swipeable-views'
-import { State as RootState } from '../../types'
 import RoomListContainer from '../RoomListContainer'
 
 import { loadData } from '../../state/TopContainer/operations'
@@ -11,8 +10,6 @@ import { Page } from '../../components'
 // import * as selectors from './selectors'
 import UserForm from '../UserForm'
 import MacAddrDescription from '../../components/MacAddrDescription'
-
-
 
 import { logout } from '../../state/Firebase/operations'
 
@@ -22,73 +19,61 @@ type Props = {
   logout: () => void
 }
 
-type State = {
-  selectedTab: number
+function TopContainer(props: Props) {
+  const [selectedTab, setSelectedTab] = useState<number>(0)
+
+  useEffect(() => {
+    props.loadData()
+    // eslint-disable-next-line
+  }, [])
+
+  return (
+    <div>
+      <Page>
+        <Tabs
+          value={selectedTab}
+          onChange={(e, selectedTab) => {
+            setSelectedTab(selectedTab)
+          }}
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          <Tab label="ホーム" />
+          <Tab label="設定" />
+        </Tabs>
+        <SwipeableViews
+          axis={'x'}
+          index={selectedTab}
+          onChangeIndex={(selectedTab: number) => {
+            setSelectedTab(selectedTab)
+          }}
+        >
+          <div>
+            <RoomListContainer />
+          </div>
+          <div>
+            <Paper>
+              <UserForm />
+            </Paper>
+            <Paper>
+              <MacAddrDescription />
+            </Paper>
+            <Paper>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={props.logout}
+              >
+                ログアウトする
+              </Button>
+            </Paper>
+          </div>
+        </SwipeableViews>
+      </Page>
+    </div>
+  )
 }
 
-class TopContainer extends React.Component<Props, State> {
-  state = { selectedTab: 0 }
-  componentDidMount() {
-    this.props.loadData()
-  }
-
-  render() {
-    const { props } = this
-
-    return (
-      <div>
-        <Page>
-          <Tabs
-            value={this.state.selectedTab}
-            onChange={(e, selectedTab: number) => {
-              this.setState({ selectedTab })
-            }}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
-          >
-            <Tab label="ホーム" />
-            <Tab label="設定" />
-          </Tabs>
-          <SwipeableViews
-            axis={'x'}
-            index={this.state.selectedTab}
-            onChangeIndex={(selectedTab: number) => {
-              this.setState({ selectedTab })
-            }}
-          >
-            <div>
-              <RoomListContainer />
-            </div>
-            <div>
-              <Paper>
-                <UserForm />
-              </Paper>
-              <Paper>
-                <MacAddrDescription />
-              </Paper>
-              <Paper>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={props.logout}
-                >
-                  ログアウトする
-                </Button>
-              </Paper>
-            </div>
-          </SwipeableViews>
-        </Page>
-      </div>
-    )
-  }
-}
-
-const ms = (state: RootState) => ({})
-
-const conn = connect(
-  ms,
-  { loadData, logout },
-)
+const conn = connect(() => ({}), { loadData, logout })
 
 export default conn(TopContainer)

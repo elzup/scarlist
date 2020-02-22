@@ -26,6 +26,7 @@ export function login(): ThunkAction {
       .auth()
       .signInWithPopup(provider)
       .then(async res => {
+        if (!res.user) return
         const user = await omitUser(res.user)
         const userRef = fdb.ref(`user/${user.id}`)
 
@@ -46,7 +47,7 @@ export function logout(): ThunkAction {
 }
 
 export function updateUser(user: User): ThunkAction {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     await dispatch(userFormActions.updateState({ loading: true }))
     await fdb.ref(`user/${user.id}`).update(user)
     if (user.macAddrs) {
@@ -58,7 +59,7 @@ export function updateUser(user: User): ThunkAction {
   }
 }
 
-async function omitUser(user: unknown): Promise<User> {
+async function omitUser(user: firebase.User): Promise<User> {
   const userOldSnap = await fdb.ref(`user/${user.uid}`).once('value')
   const userOld = userOldSnap.exists() ? userOldSnap.val() : user
 
@@ -66,7 +67,7 @@ async function omitUser(user: unknown): Promise<User> {
   const macAddrs = macs ? _.keys(_.pickBy(macs, v => v === user.uid)) : []
   // 基本DBにあるユーザ情報優先
   const displayName = userOld.displayName || user.displayName || 'no name'
-  const name = userOld.name || user.name || displayName
+  const name = userOld.name || displayName
   const photoURL = user.photoURL || userOld.photoURL || ''
   const loggedRooms = userOld.loggedRooms || {}
 
@@ -120,7 +121,7 @@ export function requestData(): ThunkAction {
           Object.keys(roomRaw.userLast).forEach(k => userIds.push(k))
         }
         dispatch(saveRoom(roomId, roomRaw))
-        roomRef.child(roomId).on('child_changed', (snap: unknown) => {
+        roomRef.child(roomId).on('child_changed', snap => {
           dispatch(saveRoom(roomId, snap.val()))
         })
       }),
