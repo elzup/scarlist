@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
 
-type Props = {}
-
-const MacAddrDescription = (props: Props) => (
+const MacAddrDescription = () => (
   <>
     <Typography variant="h5">Macアドレスの調べ方</Typography>
     <Typography>
@@ -55,13 +53,14 @@ const MacAddrDescription = (props: Props) => (
 
       <Typography variant="h6">Android</Typography>
       <Typography>
-        設定 > ネットワークとインターネット > Wi-Fi > (アクセスポイントを選択) >
-        ネットワークの詳細
+        {
+          '設定 > ネットワークとインターネット > Wi-Fi > (アクセスポイントを選択) > ネットワークの詳細'
+        }
       </Typography>
 
       <Typography variant="h6">iOS</Typography>
       <Typography color="secondary">※iOS は動作しない可能性あり</Typography>
-      <Typography>設定 > 一般 > 情報 > Wi-Fi アドレス</Typography>
+      <Typography>{'設定 > 一般 > 情報 > Wi-Fi アドレス'}</Typography>
     </section>
   </>
 )

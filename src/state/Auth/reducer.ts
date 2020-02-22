@@ -16,13 +16,13 @@ export default reducerWithInitialState(initialState)
       authorized: true,
     }
   })
-  .case(actions.logout, state => {
+  .case(actions.logout, () => {
     return {
       loading: false,
       authorized: false,
     }
   })
-  .case(actions.loginFailed, state => {
+  .case(actions.loginFailed, () => {
     return {
       loading: false,
       authorized: false,

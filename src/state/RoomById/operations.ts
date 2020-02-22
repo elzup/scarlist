@@ -6,7 +6,7 @@ import config from '../../config/index'
 import * as actions from './actions'
 
 export const saveRoom = (id: string, room: RoomRaw): ThunkAction => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     dispatch(actions.receiveRoom(toRoom(id, room)))
   }
 }

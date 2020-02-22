@@ -3,7 +3,6 @@ import { ThunkAction } from '../../types/index'
 import config from '../../config/index'
 import * as actions from './actions'
 
-
 export function dataLoadingStart(): ThunkAction {
   return (dispatch, getState) => {
     dispatch(
@@ -26,15 +25,15 @@ export function dataLoadingEnd(): ThunkAction {
   }
 }
 
-export function startTimer(topicId: string): ThunkAction {
-  return (dispatch, getState) => {
+export function startTimer(): ThunkAction {
+  return dispatch => {
     setInterval(() => {
-      dispatch(updateTimer(topicId))
+      dispatch(updateTimer())
     }, config.clockIntervalMs)
   }
 }
 
-export function updateTimer(topicId: string): ThunkAction {
+export function updateTimer(): ThunkAction {
   return (dispatch, getState) => {
     const timestamp = Date.now()
     const m = moment(timestamp)

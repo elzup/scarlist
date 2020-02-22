@@ -12,8 +12,6 @@ type Props = {
 function UserForm(props: Props) {
   const { user } = props
 
-  console.log(user)
-
   const [name, setName] = React.useState<string>('')
   const [macAddr, setMacAddr] = React.useState<string>(
     user?.macAddrs?.join(',') || '',
