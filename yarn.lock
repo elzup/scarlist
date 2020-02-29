@@ -5834,7 +5834,7 @@ escodegen@^1.11.0, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-nzap@^1.4.6:
+eslint-config-nzap@1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/eslint-config-nzap/-/eslint-config-nzap-1.4.6.tgz#f4019295234d05b7105d8e3d757495ebccdfa03f"
   integrity sha512-+vNszC5magmzdN7tw1oEDYK3aNRTINh4xZvkpluj0dnVnH7R5BZxtVneeV2OzTtnQYs9IJ3VtDrphYQYxmwyvA==
@@ -6031,7 +6031,7 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
-eslint@^6.6.0, eslint@^6.8.0:
+eslint@6.8.0, eslint@^6.6.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.8.0.tgz#62262d6729739f9275723824302fb227c8c93ffb"
   integrity sha512-K+Iayyo2LtyYhDSYwz5D5QdWw0hCacNzyq1Y821Xna2xSJj7cijoLLYmLxTQgcgZ9mC61nryMy9S7GRbYpI5Ig==
