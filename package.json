@@ -52,7 +52,7 @@
     "eslint-config-nzap": "^1.4.6",
     "husky": "4.2.3",
     "lint-staged": "10.0.7",
-    "prettier": "1.19.1",
+    "prettier": "2.3.1",
     "react-dev-utils": "10.2.0",
     "serve": "11.3.0",
     "typescript": "3.8.2",
