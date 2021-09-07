@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const crypto = require('crypto')
-const admin = require('firebase-admin')
-const functions = require('firebase-functions')
+import crypto from 'crypto'
+import * as admin from 'firebase-admin'
+import * as functions from 'firebase-functions'
 
-const token: string = functions.config().api.token | ''
+const token: string = functions.config()?.api?.token || ''
 
 const sha256 = crypto.createHash('sha256')
-const makeHash = s => {
+const makeHash = (s: string) => {
   sha256.update(s)
   return sha256.digest('hex')
 }
@@ -21,24 +21,24 @@ const getTimes = () => {
   const dateJP = new Date(date + 1000 * 60 * 60 * 9)
   // ex 2018-01
   const y = dateJP.getFullYear()
-  const m = `${dateJP.getMonth() + 1}`.padStart(2, 0)
+  const m = `${dateJP.getMonth() + 1}`.padStart(2, '0')
   const ym = `${y}-${m}`
-  const d = `${dateJP.getDate()}`.padStart(2, 0)
-  const h = `${dateJP.getHours()}`.padStart(2, 0)
+  const d = `${dateJP.getDate()}`.padStart(2, '0')
+  const h = `${dateJP.getHours()}`.padStart(2, '0')
   const timePath = `${ym}/${d}/${h}`
 
   return { ym, d, h, timePath, timestamp: date }
 }
 
-const safeAdd = (v?: number, n: number) => (v || 0) + n
-const uniq = a => Array.from(new Set(a))
+const safeAdd = (v: number | undefined, n: number) => (v || 0) + n
+const uniq = <T>(a: T[]) => Array.from(new Set(a))
 
-const auth = content => {
+const auth = (content?: string) => {
   return content !== token
 }
 
-const auth2 = (content: string, room_id: string) => {
-  return content !== makeHash(token + room_id)
+const auth2 = (roomId: string, content?: string) => {
+  return content !== makeHash(token + roomId)
 }
 
 exports.log = functions.https.onRequest(async (req, res) => {
@@ -57,9 +57,9 @@ exports.log = functions.https.onRequest(async (req, res) => {
         .end('parameter missing [room_id, user_id] or [room_id, mac_addrs]')
     }
   } else if (req.method === 'GET') {
-    const { room_id } = req.query
+    const { room_id } = req.params
 
-    if (auth2(req.headers.authorization, room_id)) {
+    if (auth2(room_id, req.headers.authorization)) {
       return res.status(401).end()
     }
     const logs = await getLogs(room_id)
@@ -88,7 +88,7 @@ exports.count = functions.https.onRequest(async (req, res) => {
     return res.status(401).end()
   }
   if (req.method === 'GET') {
-    const { room_id } = req.query
+    const { room_id } = req.params
     const counts = await getCounts(room_id)
 
     res.status(200).send(counts)
@@ -97,22 +97,21 @@ exports.count = functions.https.onRequest(async (req, res) => {
   }
 })
 
-async function insertLogsByMac(roomId, macAddrs) {
+async function insertLogsByMac(roomId: string, macAddrs: string[]) {
   const { ym, d, h, timestamp } = getTimes()
 
   const macaUserSnap = await fdb.ref(`/macaddr-user`).once('value')
-  const macaToUser = macaUserSnap.val()
-  const userIds = uniq(macAddrs.map(v => macaToUser[v]).filter(v => !!v))
+  const macaToUser = macaUserSnap.val() as Record<string, string>
+  const userIds = uniq(macAddrs.map(v => macaToUser[v]).filter(Boolean))
 
   const userLasts = (
     await fdb.ref(`/room/${roomId}/userLast`).once('value')
   ).val()
-  const updates = []
 
   const settingsSnap = await fdb.ref(`/user-setting`).once('value')
 
   if (!settingsSnap.exists()) {
-    await settingsSnap.set({})
+    await settingsSnap.ref.set({})
   }
   // const settings = settingsSnap.val()
 
@@ -121,21 +120,19 @@ async function insertLogsByMac(roomId, macAddrs) {
   //   .map(userId => settings[userId])
   //   .filter(v => !!v)
 
-  userIds.forEach(userId => {
+  userIds.forEach(async userId => {
     registerLog(roomId, userId, ym, d, h, timestamp)
 
     const v = userLasts[userId]
-    const diffMs = timestamp - new Date(v)
+    const diffMs = timestamp - +new Date(v)
     const diffHour = diffMs / 1000 / 60 / 60
 
     if (diffHour >= 1) {
       // 1時間ぶりのログ
       const userSettingRef = fdb.ref(`/user-setting/${userId}`)
-      const value = userSettingRef.once('value')
+      const value = await userSettingRef.once('value')
 
       if (!value.exists()) return
-
-      updates()
     }
   })
   const currentRoomRef = fdb.ref(`/current-room/${roomId}`)
@@ -143,7 +140,14 @@ async function insertLogsByMac(roomId, macAddrs) {
   currentRoomRef.update({})
 }
 
-function registerLog(roomId, userId, ym, d, h, timestamp) {
+function registerLog(
+  roomId: string,
+  userId: string,
+  ym: string,
+  d: string,
+  h: string,
+  timestamp: number
+) {
   const roomUserRef = fdb.ref(`/room-user-log/${roomId}/${userId}`)
   const roomCurrentRef = fdb.ref(`/room/${roomId}/userLast/${userId}`)
   const countRef = fdb.ref(`/room-user-count/${roomId}/${userId}`)
@@ -159,14 +163,22 @@ function registerLog(roomId, userId, ym, d, h, timestamp) {
 
   roomUserRef.push().set({ timestamp })
 }
+export type User = {
+  id: string
+  displayName: string
+  name: string // 自分で設定したもの
+  photoURL: string
+  macAddrs: string[]
+  loggedRooms: { [key: string]: true }
+}
 
-const userOmit = user => ({
+const userOmit = (user: User) => ({
   displayName: user.displayName,
   name: user.name,
   photoURL: user.photoURL
 })
 
-async function getLogs(roomId) {
+async function getLogs(roomId: string) {
   const usersSnap = await fdb.ref(`/user`).once('value')
   const users = usersSnap.val()
   const roomRef = fdb.ref(`/room-user-log/${roomId}`)
@@ -183,7 +195,7 @@ async function getLogs(roomId) {
   )
 }
 
-async function getCounts(roomId) {
+async function getCounts(roomId: string) {
   const countsSnap = await fdb.ref(`/room-user-count/${roomId}`).once('value')
 
   return countsSnap.val()

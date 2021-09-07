@@ -60,7 +60,7 @@
     "typescript-fsa-reducers": "1.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "now-start": "serve build/",
