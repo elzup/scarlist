@@ -6,7 +6,7 @@
   "dependencies": {
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
-    "@nivo/heatmap": "0.73.0",
+    "@nivo/heatmap": "0.80.0",
     "@types/recompose": "0.30.8",
     "babel-plugin-import": "1.13.3",
     "dotenv": "10.0.0",
